@@ -1,0 +1,32 @@
+{
+    "name" : "sturple/wp-awards-testimonials-specials",
+    "version" : "0.0.1",
+    "description" : "Wordpress plugin to add awards, testimonials and specials custom post types ",
+    "keywords" : ["wordpress", "plugin","awards","testimonials","specials","FGMS"],
+    "homepage" : "https://github.com/sturple/wp-awards-testimonials-specials",
+    "license" : "GPL-3.0",
+    "type" : "wordpress-plugin",
+    "authors" : [
+        {
+            "name" : "Shawn Turple",
+            "email" : "shawn@turple.ca",
+            "homepage" : "http://turple.ca",
+            "role" : "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type" : "composer",
+            "url" : "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php" : ">=5.4",
+        "composer/installers": "~1.0",
+        "sturple/wordpress-utilities": "~1.0",
+        "wpackagist-plugin/piklist" : ">0.9"
+    },
+    "autoload": {
+        "psr-4" : {"Fgms\\" : "src/Fgms/"}
+    }
+}

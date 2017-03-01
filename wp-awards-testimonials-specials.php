@@ -15,8 +15,10 @@ if ( file_exists( $composer_autoload = __DIR__ . '/vendor/autoload.php' ) /* che
     || file_exists( $composer_autoload = get_stylesheet_directory().'/vendor/autoload.php') /* check in child theme */
     || file_exists( $composer_autoload = get_template_directory().'/vendor/autoload.php') /* check in parent theme */
 ) {
+    
     require_once $composer_autoload;
 }
 call_user_func(function () {
+   
     $controller=new \Fgms\ATS\Controller(new \Fgms\WordPress\WordPressImpl());
 });

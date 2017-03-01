@@ -20,5 +20,5 @@ if ( file_exists( $composer_autoload = __DIR__ . '/vendor/autoload.php' ) /* che
 }
 call_user_func(function () {
    
-    $controller=new \Fgms\ATS\Controller(new \Fgms\WordPress\WordPressImpl());
+   // $controller=new \Fgms\ATS\Controller(new \Fgms\WordPress\WordPressImpl());
 });

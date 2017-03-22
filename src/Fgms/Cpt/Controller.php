@@ -1,5 +1,5 @@
 <?php
-namespace Fgms\ATS;
+namespace Fgms\Cpt;
 class Controller
 {
     private $wp;
@@ -39,6 +39,7 @@ class Controller
                 'exclude_from_search'        => true,
                 'public'        => false
                ),
+              
            array('name'          =>'Galleries',
                  'singular_name' =>'Gallery',
                  'post_type'     =>'gallery',

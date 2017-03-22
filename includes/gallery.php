@@ -2,7 +2,8 @@
 // used to get choices called internally
 function get_galllery_filters(){
   $filters = [];
-  foreach (get_option('gallery_settings')['gallery'] as $f){
+  $filter_option = empty(get_option('gallery_settings')['gallery']) ? [] : get_option('gallery_settings')['gallery'];
+  foreach ($filter_option as $f){
     $filters[$f['filters']] = $f['filters'];
   }
   return $filters;

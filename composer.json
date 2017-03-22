@@ -1,9 +1,9 @@
 {
-    "name" : "sturple/wp-awards-testimonials-specials",
+    "name" : "sturple/wp-plugin-cpt",
     "version" : "0.0.1",
-    "description" : "Wordpress plugin to add awards, testimonials and specials custom post types ",
-    "keywords" : ["wordpress", "plugin","awards","testimonials","specials","FGMS"],
-    "homepage" : "https://github.com/sturple/wp-awards-testimonials-specials",
+    "description" : "Wordpress plugin to add custom post types ie awards, testimonials, specials and slideshow custom post types ",
+    "keywords" : ["wordpress", "plugin","FGMS"],
+    "homepage" : "https://github.com/sturple/wp-plugin-cpt",
     "license" : "GPL-3.0",
     "type" : "wordpress-plugin",
     "authors" : [

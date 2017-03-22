@@ -1,1 +1,9 @@
-# Wordpress plugin to create Awards, Testimonials and specials custom post type.Wordpress
+# Wordpress plugin to create Custom Post types
+
+* Awards
+* Testimonials 
+* Specials 
+* Galleries
+* Slideshow
+
+

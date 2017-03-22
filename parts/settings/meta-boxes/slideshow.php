@@ -23,18 +23,15 @@ function get_internal_urls($post_types = []){
   return $choices_array;
 }
 
-//$choices_array = get_internal_urls(['page','post','special']);
-//$slideshow_settings = get_option('slideshow_settings');
-
-$image_txt = '';//'Home Slideshow: <br/>'.$slideshow_settings['slideshow-home-dimensions'].'<br/><br/>Secondary Slideshow:<br/>'.$slideshow_settings['slideshow-secondary-dimensions'];
-
+$choices_array = get_internal_urls(['page','post','special']);
+$slideshow_settings = get_option('slideshow_settings');
+$image_txt = 'Home Slideshow: <br/>'.$slideshow_settings['slideshow-home-dimensions'].'<br/><br/>Secondary Slideshow:<br/>'.$slideshow_settings['slideshow-secondary-dimensions'];
 piklist('field',[
     'type' => 'text',
     'field' => 'slidedelay',
     'label' => __('Slide Delay'),
     'description' => __('(IN MS)'),
-    'attributes' => array('placeholder' => 15000),
-    'value'=>15000
+    'attributes' => array('placeholder' => 15000)
 
 
 ]);
@@ -52,7 +49,7 @@ piklist('field',[
             'options' => array('button' => 'Add Image'),
             'preview_size' =>'thumbnail',
             'columns' => 4,
-        ],/*
+        ],
         [
           'type' => 'radio',
           'field' => 'radio-external-internal',
@@ -101,6 +98,6 @@ piklist('field',[
             'columns' => 4,
             'value' => ''
 
-        ],*/
+        ],
     ]
 ]);

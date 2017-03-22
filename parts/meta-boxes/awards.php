@@ -63,3 +63,10 @@ piklist('field',[
   'description'=> __(''),
   'options' => $piklist_editor_options    
 ]);
+piklist('field', [
+    'type' => 'file',
+    'field' => 'fg-feature-image',
+    'label' => 'Images',
+    'options' => array('button' => 'Add Image'),
+    'columns' => 12
+]);

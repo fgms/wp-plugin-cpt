@@ -72,3 +72,14 @@ piklist('field',[
   'description'=> __(''),
   'options' => $piklist_editor_options    
 ]);
+
+piklist('field', array(
+  'type' => 'select',
+  'field' => 'fg-source-type',
+  'label' => 'Source',
+  'choices' => array(
+    '' => 'Add Source ... ',
+    'fanferret' => 'FanFerret',
+    'tripadvisor' => 'Trip Advisor'
+  )
+));

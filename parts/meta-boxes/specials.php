@@ -95,3 +95,10 @@ piklist('field',[
   'field' => 'fg-booking-url',
   'columns' => 12
 ]);
+piklist('field', [
+    'type' => 'file',
+    'field' => 'fg-feature-image',
+    'label' => 'Images',
+    'options' => array('button' => 'Add Image'),
+    'columns' => 12
+]);

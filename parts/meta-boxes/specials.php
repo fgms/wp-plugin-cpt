@@ -20,19 +20,19 @@ $piklist_editor_options = array( // Pass any option that is accepted by wp_edito
         'wp_autoresize_on' => true
       )
     );
-  
+/*
 piklist('field',[
   'type' => 'text',
   'label' => __('Subtitle'),
   'field' => 'fg-subititle',
   'columns' => 12
-]);
+]);*/
 piklist('field',[
   'type' => 'editor',
   'field' => 'fg-summary',
   'label' => __('Summary'),
   'description'=> __(''),
-  'options' => $piklist_editor_options    
+  'options' => $piklist_editor_options
 ]);
 piklist('field',[
   'type' => 'text',
@@ -54,7 +54,7 @@ piklist('field',[
   'options' => array(
       'dateFormat' => 'M d, yy'
     )
-]);  
+]);
 piklist('field',[
   'type' => 'datepicker',
   'label' => __('Stay End Date'),
@@ -63,8 +63,8 @@ piklist('field',[
   'options' => array(
       'dateFormat' => 'M d, yy'
     )
-]);  
-  
+]);
+
 piklist('field',[
   'type' => 'datepicker',
   'label' => __('Booking Window Start Date'),
@@ -73,7 +73,7 @@ piklist('field',[
   'options' => array(
       'dateFormat' => 'M d, yy'
     )
-]);  
+]);
 piklist('field',[
   'type' => 'datepicker',
   'label' => __('Booking Window End Date'),
@@ -82,7 +82,7 @@ piklist('field',[
   'options' => array(
       'dateFormat' => 'M d, yy'
    )
-]);    
+]);
 piklist('field',[
   'type' => 'text',
   'label' => __('Booking Code'),
@@ -94,11 +94,4 @@ piklist('field',[
   'label' => __('Booking Engine Link'),
   'field' => 'fg-booking-url',
   'columns' => 12
-]);
-piklist('field', [
-    'type' => 'file',
-    'field' => 'fg-feature-image',
-    'label' => 'Images',
-    'options' => array('button' => 'Add Image'),
-    'columns' => 12
 ]);

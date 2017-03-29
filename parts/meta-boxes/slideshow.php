@@ -23,10 +23,10 @@ function get_internal_urls($post_types = []){
   return $choices_array;
 }
 
-//$choices_array = get_internal_urls(['page','post','special']);
-//$slideshow_settings = get_option('slideshow_settings');
+$choices_array = get_internal_urls(['page','post','special']);
+$slideshow_settings = get_option('slideshow_settings');
 
-$image_txt = '';//'Home Slideshow: <br/>'.$slideshow_settings['slideshow-home-dimensions'].'<br/><br/>Secondary Slideshow:<br/>'.$slideshow_settings['slideshow-secondary-dimensions'];
+$image_txt = 'Home Slideshow: <br/>'.$slideshow_settings['slideshow-home-dimensions'].'<br/><br/>Secondary Slideshow:<br/>'.$slideshow_settings['slideshow-secondary-dimensions'];
 
 piklist('field',[
     'type' => 'text',
@@ -48,11 +48,12 @@ piklist('field',[
         [
             'type' => 'file',
             'field' => 'slide-image',
-            'label' => '',
+            'label' => 'Image',
             'options' => array('button' => 'Add Image'),
             'preview_size' =>'thumbnail',
-            'columns' => 4,
-        ],/*
+            'columns' => 2,
+
+        ],
         [
           'type' => 'radio',
           'field' => 'radio-external-internal',
@@ -69,7 +70,7 @@ piklist('field',[
             'label' => __('External URL'),
             'description' => 'Enter full url.',
             'field' => 'external',
-            'columns' => 4,
+            'columns' => 6,
             'conditions' => [
                 [
                   'field' =>  'slides:radio-external-internal',
@@ -84,7 +85,7 @@ piklist('field',[
             'description' => '',
             'field' => 'internal',
             'choices' => $choices_array,
-            'columns' => 4,
+            'columns' => 6,
             'conditions' => [
                 [
                   'field' =>  'slides:radio-external-internal',
@@ -93,14 +94,6 @@ piklist('field',[
             ],
 
         ],
-        [
-            'type' => 'text',
-            'label' => __('Alt'),
-            'description' => '',
-            'field' => 'alt',
-            'columns' => 4,
-            'value' => ''
 
-        ],*/
     ]
 ]);

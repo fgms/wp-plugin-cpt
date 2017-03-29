@@ -14,18 +14,31 @@ piklist('field', array(
   'label' => 'Shortcode',
   'value' => $shortcode
 ));
+
+piklist('field', array(
+  'type' => 'select',
+  'field'=> 'randomize',
+  'label' => __('Randomize'),
+  'choices' => [
+    'yes' => 'yes',
+    'no'  => 'no'
+  ],
+  'value' => 'no',
+  'columns'=> 4
+));
 /*
 piklist('field', array(
-  'type' => 'checkbox',
-  'field'=> 'randomize',
-  'label' => __(''),
+  'type' => 'select',
+  'field'=> 'gallery_type',
+  'label' => __('Gallery Type'),
   'choices' => [
-    'yes' => 'Randomize'
+    'sidebar' => 'Sidebar',
+    'full'  => 'Full'
   ],
-  'multiple' =>'false',
-  'value' => 'no',
-  'columns'=> 12
+  'value' => 'sidebar',
+  'columns'=> 4
 ));*/
+
 piklist('field', array(
   'type' => 'select',
   'field'=> 'thumbs-per-row',

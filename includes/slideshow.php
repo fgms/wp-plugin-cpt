@@ -1,15 +1,15 @@
 <?php
 // used to get choices called internally
-function get_slideshow_choices(){
-    $choices_array = array(''=>'-- Select Slideshow -- ');
+function get_slideshow_choices($type='slideshow'){
+    $choices_array = array(''=>'-- Select -- ');
     $my_wp_query = new WP_Query();
-    $all_wp_pages = $my_wp_query->query(array('post_type'       => 'slideshow',
+    $all_wp_pages = $my_wp_query->query(array('post_type'       => $type,
                                               'posts_per_page'  => 1000,
                                               'orderby'         => 'title',
                                               'order'           => 'asc'));
-    
-    foreach ($all_wp_pages as $accessory){ 
-        $choices_array[$accessory->ID] =  $accessory->post_title;
+
+    foreach ($all_wp_pages as $post){
+        $choices_array[$post->ID] =  $post->post_title;
     }
     return $choices_array;
 }
@@ -23,26 +23,26 @@ function get_slideshow_fields($group='') {
             'label' => '',
             'choices' => [
                 'image'     => 'Feature Image',
-                'slideshow' => 'Slideshow' 
+                'slideshow' => 'Slideshow'
             ],
             'value' => 'image',
             'columns' => 2
         ],
         [
             'type' => 'select',
-            'label' => __('Slideshow'),    
+            'label' => __('Slideshow'),
             'field' => 'slideshow-list',
-            'choices' => get_slideshow_choices(),    
+            'choices' => get_slideshow_choices(),
             'conditions' => [
                 [
                   'field' => $group . 'slide-or-image-radio',
                   'value' => 'slideshow'
                 ]
             ],
-            'columns' => 4          
-        ],   
+            'columns' => 4
+        ],
         [
-            'type' => 'file',           
+            'type' => 'file',
             'field' => 'feature-image',
             'label' => 'Image',
             'options' => array('button' => 'Add Image'),

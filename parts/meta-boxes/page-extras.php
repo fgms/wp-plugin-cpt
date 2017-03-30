@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Extras
-Post Type: page, special
+Post Type: page
 Order: 0
 Collapse: false
 Priority: high

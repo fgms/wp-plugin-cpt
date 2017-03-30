@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Slideshow / Gallery Settings
+Title: Images(s)
 Post Type: page,  special, post
 Order: 5
 Collapse: false

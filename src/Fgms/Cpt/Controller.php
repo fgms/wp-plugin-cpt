@@ -39,7 +39,6 @@ class Controller
                 'exclude_from_search'        => true,
                 'public'        => false
                ),
-              
            array('name'          =>'Galleries',
                  'singular_name' =>'Gallery',
                  'post_type'     =>'gallery',
@@ -49,6 +48,69 @@ class Controller
                  'exclude_from_search'        => true,
                  'public'        => false
           ),
+          array('name'          =>'Announcements',
+                'singular_name' =>'Announcement',
+                'post_type'     =>'company-announcement',
+                'domain'        =>'fgms-company-announcement',
+                'menu_icon'     =>'dashicons-megaphone',
+                'supports'      => array('title'),
+                'exclude_from_search'        => false,
+                'public'        => true
+         ),
+         array('name'          =>'Media Clippings',
+               'singular_name' =>'Meida Clip',
+               'post_type'     =>'media-clip',
+               'domain'        =>'fgms-media-clip',
+               'menu_icon'     =>'dashicons-images-alt',
+               'supports'      => array('title'),
+               'exclude_from_search'        => false,
+               'public'        => true
+        ),
+        array('name'          =>'Newsletters',
+              'singular_name' =>'Newsletter',
+              'post_type'     =>'newsletter',
+              'domain'        =>'fgms-newsletter',
+              'menu_icon'     =>'dashicons-media-document',
+              'supports'      => array('title'),
+              'exclude_from_search'        => false,
+              'public'        => true
+       ),
+       array('name'          =>'Condo Sales',
+             'singular_name' =>'Condo Sale',
+             'post_type'     =>'condo-sales',
+             'domain'        =>'fgms-condo-sales',
+             'menu_icon'     =>'dashicons-building',
+             'supports'      => array('title'),
+             'exclude_from_search'        => false,
+             'public'        => true
+      ),
+      array('name'          =>'GD Announcements',
+            'singular_name' =>'GD Annnouncement',
+            'post_type'     =>'dir-announcement',
+            'domain'        =>'fgms-dir-announcement',
+            'menu_icon'     =>'dashicons-index-card',
+            'supports'      => array('title'),
+            'exclude_from_search'        => true,
+            'public'        => false
+     ),
+     array('name'          =>'GD Activities',
+           'singular_name' =>'GD Activity',
+           'post_type'     =>'activity',
+           'domain'        =>'fgms-activity',
+           'menu_icon'     =>'dashicons-index-card',
+           'supports'      => array('title'),
+           'exclude_from_search'        => true,
+           'public'        => false
+    ),
+    array('name'          =>'GD Dining',
+          'singular_name' =>'GD Dining',
+          'post_type'     =>'dining',
+          'domain'        =>'fgms-dining',
+          'menu_icon'     =>'dashicons-index-card',
+          'supports'      => array('title'),
+          'exclude_from_search'        => true,
+          'public'        => false
+   ),
         );
         $this->wp=$wp;
         //	Attach hooks

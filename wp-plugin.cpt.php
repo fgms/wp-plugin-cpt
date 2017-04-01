@@ -22,3 +22,42 @@ if ( file_exists( $composer_autoload = __DIR__ . '/vendor/autoload.php' ) /* che
 call_user_func(function () {
     $controller=new \Fgms\Cpt\Controller(new \Fgms\WordPress\WordPressImpl());
 });
+
+
+add_action( 'pre_get_posts', function($query){
+  if ($query->get('post_type') == 'media-clip'){
+    $query->set('orderby' ,'meta_value');
+    $query->set('meta_key','fg-timestamp');
+  }
+});
+add_action( 'save_post', function($post_id){
+  function setTimeStampMetaData($field,$id){
+    if (! empty($_POST['_post_meta'][$field])){
+      $date = $_POST['_post_meta'][$field];
+      $timestamp_field = str_replace('date','timestamp', $field);
+      if (!empty($date)){
+        $datetime = new DateTime( $date );
+        update_post_meta( $id, $timestamp_field, $datetime->getTimestamp() );
+      }
+    }
+  }
+  // create another custom meta data fg-timestamp for all date fields.
+  $whitelist = ['media-clip', 'newsletter','award','testimonial','special'];
+  if ( (!empty($_POST['post_type'])) && (in_array($_POST['post_type'],$whitelist)) ){
+    if ($_POST['post_type'] == 'special'){
+      setTimeStampMetaData('fg-start-date',$post_id);
+      setTimeStampMetaData('fg-end-date',$post_id);
+      setTimeStampMetaData('fg-booking-start-date',$post_id);
+      setTimeStampMetaData('fg-booking-end-date',$post_id);
+    }
+    else {
+      setTimeStampMetaData('fg-date',$post_id);
+    }
+
+
+  }
+
+
+
+
+} );

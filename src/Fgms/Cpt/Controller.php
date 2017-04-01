@@ -75,21 +75,21 @@ class Controller
               'exclude_from_search'        => false,
               'public'        => true
        ),
-       array('name'          =>'Condo Sales',
-             'singular_name' =>'Condo Sale',
-             'post_type'     =>'condo-sales',
-             'domain'        =>'fgms-condo-sales',
+       array('name'          =>'Real Estate',
+             'singular_name' =>'Real Estate Listing',
+             'post_type'     =>'real-estate',
+             'domain'        =>'fgms-real-estate',
              'menu_icon'     =>'dashicons-building',
              'supports'      => array('title'),
              'exclude_from_search'        => false,
              'public'        => true
       ),
-      array('name'          =>'GD Announcements',
-            'singular_name' =>'GD Annnouncement',
+      array('name'          =>'GD Updates',
+            'singular_name' =>'GD Update',
             'post_type'     =>'dir-announcement',
             'domain'        =>'fgms-dir-announcement',
             'menu_icon'     =>'dashicons-index-card',
-            'supports'      => array('title'),
+            'supports'      => array('title', 'editor'),
             'exclude_from_search'        => true,
             'public'        => false
      ),
@@ -115,6 +115,11 @@ class Controller
         $this->wp=$wp;
         //	Attach hooks
         $this->wp->add_action('init',[$this,'registerPostType']);
+
+
+
+
+
     }
     public function registerPostType()
     {

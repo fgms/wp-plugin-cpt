@@ -13,7 +13,7 @@ piklist('field',[
   'field' => 'fg-start-date',
   'columns' => 12,
   'options' => array(
-      'dateFormat' => 'M d, yy'
+      'dateFormat' => 'MM d, yy'
     )
 ]);
 piklist('field',[
@@ -22,7 +22,7 @@ piklist('field',[
   'field' => 'fg-end-date',
   'columns' => 12,
   'options' => array(
-      'dateFormat' => 'M d, yy'
+      'dateFormat' => 'MM d, yy'
     )
 ]);
 
@@ -32,7 +32,7 @@ piklist('field',[
   'field' => 'fg-booking-start-date',
   'columns' => 12,
   'options' => array(
-      'dateFormat' => 'M d, yy'
+      'dateFormat' => 'MM d, yy'
     )
 ]);
 piklist('field',[
@@ -41,6 +41,6 @@ piklist('field',[
   'field' => 'fg-booking-end-date',
   'columns' => 12,
   'options' => array(
-      'dateFormat' => 'M d, yy'
+      'dateFormat' => 'MM d, yy'
    )
 ]);

@@ -20,6 +20,27 @@ $piklist_editor_options = array( // Pass any option that is accepted by wp_edito
       )
     );
 
+piklist('field', array(
+  'type' => 'select',
+  'field' => 'fg-source-type',
+  'label' => 'Source',
+  'choices' => array(
+    'fanferret' => 'FanFerret',
+    'tripadvisor' => 'TripAdvisor',
+    'other'       => 'Other'
+  ),
+  'value' =>'tripadvisor'
+));
+
+piklist('field',[
+  'type' => 'datepicker',
+  'label' => __('Date'),
+  'field' => 'fg-date',
+  'columns' => 4,
+  'options' => array(
+      'dateFormat' => 'MM d, yy'
+    )
+]);
 
 
 
@@ -27,59 +48,71 @@ piklist('field',[
   'type' => 'text',
   'label' => __('Guest Name (or OTA Name)'),
   'field' => 'fg-name',
-  'columns' => 12
+  'columns' => 12,
+  'conditions' => [
+    [
+      'value' => 'other',
+      'field' => 'fg-source-type'
+    ]
+  ]
 ]);
 piklist('field',[
   'type' => 'file',
   'field' => 'fg-image-logo',
   'label' => 'OTA Logo',
   'options' => array('button' => 'Add Logo'),
-  'columns' => 3
+  'columns' => 3,
+  'conditions' => [
+    [
+      'value' => 'other',
+      'field' => 'fg-source-type'
+    ]
+  ]
 ]);
 piklist('field',[
   'type' => 'file',
   'field' => 'fg-image',
   'label' => 'Guest Photo',
   'options' => array('button' => 'Add Image'),
-  'columns' => 9
-]);   
+  'columns' => 9,
+  'conditions' => [
+    [
+      'value' => 'other',
+      'field' => 'fg-source-type'
+    ]
+  ]
+]);
 piklist('field',[
   'type' => 'text',
   'label' => __('Guest Location'),
   'field' => 'fg-location',
-  'columns' => 12
-]);
-piklist('field',[
-  'type' => 'datepicker',
-  'label' => __('Date'),
-  'field' => 'fg-date',
   'columns' => 12,
-  'options' => array(
-      'dateFormat' => 'M d, yy'
-    )
+  'conditions' => [
+    [
+      'value' => 'other',
+      'field' => 'fg-source-type'
+    ]
+  ]
 ]);
+
 piklist('field',[
   'type' => 'url',
   'label' => __('Source URL'),
   'field' => 'fg-source',
-  'columns' => 12
+  'columns' => 12,
+  'conditions' => [
+    [
+      'value' => 'other',
+      'field' => 'fg-source-type'
+    ]
+  ]
 ]);
-      
+
+
 piklist('field',[
   'type' => 'editor',
   'field' => 'fg-summary',
   'label' => __('Full Testimonial'),
   'description'=> __(''),
-  'options' => $piklist_editor_options    
+  'options' => $piklist_editor_options
 ]);
-
-piklist('field', array(
-  'type' => 'select',
-  'field' => 'fg-source-type',
-  'label' => 'Source',
-  'choices' => array(
-    '' => 'Add Source ... ',
-    'fanferret' => 'FanFerret',
-    'tripadvisor' => 'Trip Advisor'
-  )
-));

@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Feature Box
+Title: Home Page Feature Box
 Post Type: special
 Order: 3
 Collapse: false
@@ -23,9 +23,9 @@ piklist('field',[
 piklist('field',[
   'type'  => 'checkbox',
   'field' => 'fg-widget-enable',
-  'title' => 'Add to Special Widget',
+  'title' => '',
   'choices' =>[
-    'yes' =>'Yes'
+    'yes' =>'Activate'
   ],
   'value'=> 'no'
 ]);
@@ -33,9 +33,9 @@ piklist('field',[
 piklist('field', array(
   'type' => 'file'
   ,'field' => 'fg-widget-images'
-  ,'description' => 'Add Image For Special Widget'
+  ,'description' => 'Add Image'
   ,'options' => array(
-    'modal_title' => 'Add Images(s)'
-    ,'button' => 'Add'
+    'modal_title' => 'Add Image(s)'
+    ,'button' => 'Add Image'
   )
 ));

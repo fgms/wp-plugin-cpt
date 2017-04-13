@@ -53,11 +53,39 @@ add_action( 'save_post', function($post_id){
     else {
       setTimeStampMetaData('fg-date',$post_id);
     }
-
-
   }
+});
 
-
-
-
-} );
+add_filter('piklist_admin_pages', function($pages){
+	$pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=slideshow'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'slideshow_settings'
+	 ,'setting' => 'slideshow_settings'
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
+	$pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=gallery'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'gallery_settings'
+	 ,'setting' => 'gallery_settings'
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
+  $pages[] = [
+   'page_title' => __('Custom Post Type Settings')
+   ,'menu_title' => __('CPT Settings', 'piklist')
+   ,'sub_menu' => 'options-general.php'
+   ,'capability' => 'manage_options'
+   ,'menu_slug' => 'cpt_settings'
+   ,'setting' => 'cpt_settings'
+   ,'single_line' => true
+   ,'save_text' => 'Save Settings'
+  ];
+  return $pages;
+});

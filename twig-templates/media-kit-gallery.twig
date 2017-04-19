@@ -1,0 +1,48 @@
+{% set content %}
+
+<ul id="blog-articles" class="mediakit-index">
+{% for image in images %}
+  {% set content_pre %}
+    <div class="col-md-3">
+      {% filter shortcodes %}
+      <div class="script-gallery-action ">
+        <div  style="margin: -2px 0 12px; padding-top:0;" class="h3 hidden-md hidden-lg">{{image.title}}</div>
+        <div style="margin-bottom: 12px;">
+        [fgallery class="script-clone-trigger"
+                group="{{image.group}}"
+                width="100%"
+                alt="{{image.title}}"
+                thumb="{{image.thumb}}"]
+        <img src="{{image.medium}}"  alt="{{image.title}}" class="img-responsive"/>
+        [/fgallery]
+      </div>
+      </div>
+      {% endfilter %}
+    </div>
+  {% endset %}
+{# **************** setting article content with summary #}
+	{% set articleContent %}
+    <h3 style="margin: -2px 0 24px; padding-top: 0;" class="hidden-sm hidden-xs">{{image.title}}</h3>
+
+
+    <a href="javascript:void(0);" class="btn btn-primary btn-sm script-clone">Click to Enlarge</a>
+    <span class="seperator">  </span>
+    <a href="{{image.large}}" target="_blank" class="btn btn-primary btn-sm" alt="{{image.title}}">Download High-Res</a>
+	{% endset %}
+
+{# **************** settin object to padd to article content #}
+	{% set obj = {
+  article : article,
+	title : title,
+	articleContent : articleContent,
+  class : "article-page-default",
+  class_container: "row",
+  class_main:  "col-md-9 ",
+  content_pre : content_pre
+  } %}
+
+  <li class="script-clone-wrapper">{% include "article/article-content.twig" with obj only %}</li>
+{% endfor %}
+</ul>
+{% endset %}
+{{content | trim}}

@@ -18,10 +18,13 @@ if ( file_exists( $composer_autoload = __DIR__ . '/vendor/autoload.php' ) /* che
 ) {
 
     require_once $composer_autoload;
+    require_once(__DIR__.'/shortcodes/gallery.php');
+    require_once(__DIR__.'/shortcodes/page-gallery.php');
 }
 call_user_func(function () {
     $controller=new \Fgms\Cpt\Controller(new \Fgms\WordPress\WordPressImpl());
 });
+
 function setTimeStampMetaData($field,$id){
   if (! empty($_POST['_post_meta'][$field])){
     $date = $_POST['_post_meta'][$field];
@@ -54,6 +57,13 @@ add_action( 'save_post', function($post_id){
       setTimeStampMetaData('fg-date',$post_id);
     }
   }
+});
+
+
+add_filter('fg_theme_master_twig_locations', function($timberLocationsArray){
+  $a = [];
+  $a[] = __DIR__ .'/twig-templates';
+  return array_merge($a,$timberLocationsArray);
 });
 
 add_filter('piklist_admin_pages', function($pages){

@@ -31,9 +31,9 @@
 				{# ----------- FILTERS -----------#}
 				{% if filter.enable and filters %}
 				<div class="gallery-filters">
-						<button class="btn {% if filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter="*">All</button>
+						<button class="btn btn-default btn-sm" data-filter="*">All</button>
 						{% for fslug,ftitle in filters %}
-						<button class="btn {% if filter.onpost%}btn-secondary{%else%}btn-primary{%endif%} btn-sm" data-filter=".{{fslug}}">{{ftitle}}</button>
+						<button class="btn btn-default btn-sm" data-filter=".{{fslug}}">{{ftitle}}</button>
 						{% endfor %}
 				</div>
 				{% endif %}
@@ -44,7 +44,7 @@
 					{% if options.feature %}
 					<div  class="__st_gallery_feature_wrapper script-feature ">
 							<div class="__st_gallery_feature_content script-feature-content"  >
-								{% for image in images |slice(0,limit) %}								
+								{% for image in images |slice(0,limit) %}
 				         <div id="{{gallery_name}}{{loop.index}}"class="{% if loop.first %}active{% endif %}"  >
 									<a  {{gmacro.linkattributes(gallery, image)}}
                       {% if image.title %}title="{{image.title|e('html_attr')}}"{% endif %}

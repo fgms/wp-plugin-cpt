@@ -7,7 +7,7 @@
       {% filter shortcodes %}
       <div class="script-gallery-action ">
         <div  style="margin: -2px 0 12px; padding-top:0;" class="h3 hidden-md hidden-lg">{{image.title}}</div>
-        <div style="margin-bottom: 12px;">
+        <div style="margin-bottom: 12px;" class="media-kit-image-wrapper">
         [fgallery class="script-clone-trigger"
                 group="{{image.group}}"
                 width="100%"
@@ -23,8 +23,6 @@
 {# **************** setting article content with summary #}
 	{% set articleContent %}
     <h3 style="margin: -2px 0 24px; padding-top: 0;" class="hidden-sm hidden-xs">{{image.title}}</h3>
-
-
     <a href="javascript:void(0);" class="btn btn-primary btn-sm script-clone">Click to Enlarge</a>
     <span class="seperator">  </span>
     <a href="{{image.large}}" target="_blank" class="btn btn-primary btn-sm" alt="{{image.title}}">Download High-Res</a>
@@ -41,7 +39,7 @@
   content_pre : content_pre
   } %}
 
-  <li class="script-clone-wrapper">{% include "media-kit-gallery-element.twig" with obj only %}</li>
+  <li class="script-clone-wrapper media-kit-gallery-element">{% include "media-kit-gallery-element.twig" with obj only %}</li>
 {% endfor %}
 </ul>
 {% endset %}

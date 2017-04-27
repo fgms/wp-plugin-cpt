@@ -1,0 +1,68 @@
+{% macro get_file(id)%}
+{% set id = id +0 %}
+{% if id > 0 %}
+{% set pdf = TimberImage(id) %}
+{# removes the pdf file name to add the image #}
+{% set thumb = pdf.src|regex_replace('/[a-zA-Z0-9-_]+\.pdf$/',pdf.sizes.large.file) %}
+<li >
+<a href="{{pdf.src}}" target="_blank" data-background="{{thumb}}">
+	<img src="{{thumb}}" alt="{{pdf.title}}"  />
+</a>
+</li>
+{% endif %}
+{% endmacro %}
+{% import _self as newsletters %}
+
+{% extends 'base.twig' %}
+{% block content %}
+{% set page_content_class = config.settings.article.grid.left.class %}
+{% if function('is_post_type_archive','special') %}
+	{% set page_content_class = 'col-sm-12' %}
+	{% set article_object = {
+		class : "article-page-default"
+	} %}
+{% else %}
+	{% set page_class_sidebar = config.settings.article.grid.right.class %}
+	{% set page_widget_sidebar %}{% include 'blog-sidebar.twig' %}{% endset %}
+	{% set article_object = {
+		class : "article-page-default article-blog"
+	} %}
+{% endif %}
+
+{% set content %}
+<h1 >{{archive_title | default('Blog')}}</h1>
+
+<ul id="blog-articles">
+{% for article in posts %}
+	{% set articleContent %}
+		<div style="margin-bottom: 8px;">{{article.get_field('fg-date')}}</div>
+		{% set articleFiles %}
+			{% set files  = article.get_field('newsletter-pdf')  %}
+			{% if files is iterable %}
+				{% for file in files %}
+				{{newsletters.get_file(file)}}
+				{% endfor %}
+			{% else %}
+			{{newsletters.get_file(files)}}
+			{% endif %}
+		{% endset %}
+		{% set articleFiles  = articleFiles | trim %}{% if articleFiles | length > 0 %}<ul class="article-file-list newsletter-pdf ">{{articleFiles}}</ul>{% endif %}
+	{% endset %}
+
+	{% set obj = {article : article, articleContent: articleContent, title: '<h2 style="margin-bottom: 0;">'~article.title ~'</h2>'}|merge(article_object) %}
+	<li>{% include "article/article-content.twig" with obj only %}</li>
+{% endfor %}
+</ul>
+{% include 'pagination.twig' %}
+{% endset %}
+
+
+
+{% include 'base-page.twig' with {
+	page_class_content : page_content_class,
+	page_class_sidebar : page_class_sidebar,
+	page_widget_sidebar: page_widget_sidebar,
+	page_content : content
+	}
+%}
+{% endblock %}

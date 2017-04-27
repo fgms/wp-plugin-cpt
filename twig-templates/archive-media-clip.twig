@@ -1,0 +1,95 @@
+{% extends 'base.twig' %}
+{% block content %}
+
+
+{% set content %}
+<h1 class="archive-title">{{archive_title}}</h1>
+<ul class="card-wrapper">
+{% for article in posts | reverse %}
+  {# title needs to be in a table to vertical-align #}
+	{% set title %}
+    <table class="card-header ">
+      <tr>
+        <td>
+          <a href="{{ article.link }}" title="{{ article.title | escape }}" itemprop="url">
+              <h2 class="article-title" itemscope="name">{{article.title}}</h2>
+          </a>
+        </td>
+      </tr>
+    </table>
+  {% endset %}
+
+  {# background image on index #}
+  {% set feature_image = false %}
+  {% set img_id = article.get_field('feature-image') %}
+  {% if img_id is iterable %}{% set img_id = img_id | first %}{% endif %}
+  {% if  img_id + 0 > 0 %}
+    {% set feature_image = TimberImage(img_id) %}
+	{% else %}	
+		{% set feature_image = TimberImage(1834) %}
+  {% endif %}
+
+  {# content #}
+	{% set articleContent %}
+    <div style="overflow: hidden;">
+      <a href="{{article.link}}" class="card-content" >
+        <div class="card-content-background" {% if feature_image %}data-background="{{feature_image.src|resize(500)}}" {% endif %}></div>
+        <div >{{article.get_field('fg-summary')|striptags| truncate(35) }}</div>
+      </a>
+    </div>
+    {% set img = false %}
+    {% set img_id = article.get_field('clipping-logo') %}
+    {% if img_id is iterable %}{% set img_id = img_id | first %}{% endif %}
+    {% if  img_id + 0 > 0 %}
+      {% set img = TimberImage(img_id) %}
+    {% endif %}
+
+    {% set author = article.get_field('fg-author') %}
+    {% set publisher = article.get_field('fg-publisher') %}
+    {% set date = article.get_field('fg-date') %}
+    <div class="card-footer">
+      <div class="row">
+        {% if img %}
+        <div class="col-xs-6">
+          <div class="card-logo-wrapper">
+            <a href="{{article.link}}" data-background="{{img.src}}" >
+              <img src="{{img.src}}" alt="{{publisher}} Logo" />
+            </a>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="{% if img %}col-xs-6{% else %}col-xs-12{% endif %}" >
+          <div class="publisher">{{publisher}}</div>
+          <div class="date">{{date}}</div>
+        </div>
+      </div>
+    </div>
+		{#<div class="card-button" style="padding-top: 12px;"><a href="{{article.link}}" class="btn btn-primary" >View</a></div>#}
+	{% endset %}
+
+
+	{% set obj = {
+  article : article,
+	title : title,
+	articleContent : articleContent,
+
+
+
+
+  } %}
+
+  <li class="card-item-4">{% include "article/article-content.twig" with obj only %}</li>
+{% endfor %}
+</ul>
+{% include 'pagination.twig' %}
+{% endset %}
+
+
+
+{% include 'base-page.twig' with {
+	page_class_content : 'col-sm-12',
+	page_content : content
+	}
+%}
+{% endblock %}

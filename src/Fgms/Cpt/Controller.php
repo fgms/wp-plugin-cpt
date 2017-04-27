@@ -128,7 +128,7 @@ class Controller
           $post_type_array[] = [
             'name'          =>'GD Activities',
             'singular_name' =>'GD Activity',
-            'post_type'     =>'activity',
+            'post_type'     =>'dir-activity',
             'domain'        =>'fgms-activity',
             'menu_icon'     =>'dashicons-index-card',
             'supports'      => array('title'),
@@ -140,7 +140,7 @@ class Controller
           $post_type_array[] = [
             'name'          =>'GD Dining',
             'singular_name' =>'GD Dining',
-            'post_type'     =>'dining',
+            'post_type'     =>'dir-dining',
             'domain'        =>'fgms-dining',
             'menu_icon'     =>'dashicons-index-card',
             'supports'      => array('title'),
@@ -153,11 +153,43 @@ class Controller
         //	Attach hooks
         $this->wp->add_action('init',[$this,'registerPostType']);
 
+        // updating index for Real Estate.
+        add_filter('manage_real-estate_posts_columns', function($defaults){
 
+            unset($defaults['date']);
+            unset($defaults['wpseo-score']);
+            unset($defaults['wpseo-score-readability']);
+            $defaults['title'] = 'Unit#';
+            $defaults['bedrooms'] = 'Bedrooms';
+            $defaults['views'] = 'View | Type';
+            $defaults['price'] = 'Price';
+            $defaults['status'] = 'Status';
+            return $defaults;
+        }, 20);
+        add_action('manage_real-estate_posts_custom_column', function($column_name,$post_ID){
+          $options = get_option('realestate_settings');
+          $style = get_post_meta($post_ID, 'condo-style', true);
+          if (strlen($style) > 5 ){
+            $style = ' | ' .$style;
+          }
+          if ($column_name == 'bedrooms'){  echo get_post_meta($post_ID, 'condo-type', true); }
+          if ($column_name == 'views'){  echo get_post_meta($post_ID, 'condo-view', true) . $style ; }
+          if ($column_name == 'price'){  echo get_post_meta($post_ID, 'condo-price', true) . ' '. $options['realestate_units']; }
+          if ($column_name == 'status'){  echo ucfirst(get_post_meta($post_ID, 'condo-status', true)); }
+       }, 10, 2);
 
-
-
+        add_action( 'template_redirect', function() {
+           if ( is_singular('real-estate') ) {
+             wp_redirect( get_post_type_archive_link('real-estate'), 302 );
+             exit;
+           }
+           elseif (is_singular('newsletter')){
+             wp_redirect( get_post_type_archive_link('newsletter'), 302 );
+             exit;
+           }
+         });
     }
+
     private function is_enabled($opt, $default=false){
       $theme_options = get_option('cpt_settings');
       if (!empty($theme_options[$opt])){

@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Guest Directory Activites.
-Post Type: activity
+Post Type: dir-activity
 Order: 10
 Collapse: false
 Priority: high

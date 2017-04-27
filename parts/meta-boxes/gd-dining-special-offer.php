@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Guest Directory Dining (Special Offer)
-Post Type: dining
+Post Type: dir-dining
 Order: 20
 Collapse: false
 Priority: high

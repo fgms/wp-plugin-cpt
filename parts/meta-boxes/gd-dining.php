@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Guest Directory Dining
-Post Type: dining
+Post Type: dir-dining
 Order: 10
 Collapse: false
 Priority: high

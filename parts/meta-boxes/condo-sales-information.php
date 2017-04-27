@@ -56,6 +56,7 @@ piklist('field',[
   'field' => 'condo-type',
   'choices' => [
     'Studio' => 'Studio',
+    'Studio w/ Loft' => 'Studio w/ Loft',
     '1 Bedroom' => '1 Bedroom',
     'One Bedroom w/ Loft' => 'One Bedroom w/ Loft',
     '2 Bedroom' => '2 Bedrooms',
@@ -91,11 +92,10 @@ piklist('field',[
   'label' => __('Status'),
   'field' => 'condo-status',
   'choices' => [
-    'pending' => 'Pending',
     'active' => 'Active',
-    'active-highlight' => 'Acitive Highlight',
+    'pending' => 'Sale Pending',
     'sold' => 'Sold',
-    'remove' => 'Remove'
+    'inactive' => 'Inactive'
   ],
   'value' => 'active',
   'columns' => 4

@@ -3,7 +3,6 @@
 Title: Defaults
 Setting: slideshow_settings
 Order: 10
-
 */
 
 require_once __DIR__.'/../../includes/slideshow.php';

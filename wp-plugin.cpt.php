@@ -88,6 +88,16 @@ add_filter('piklist_admin_pages', function($pages){
 	 ,'save_text' => 'Save Settings'
 	];
   $pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=real-estate'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'realestate_settings'
+	 ,'setting' => 'realestate_settings'
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
+  $pages[] = [
    'page_title' => __('Custom Post Type Settings')
    ,'menu_title' => __('CPT Settings', 'piklist')
    ,'sub_menu' => 'options-general.php'

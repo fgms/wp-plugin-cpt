@@ -112,6 +112,7 @@ class Controller
             'public'        => true
           ];
         }
+        /*
         if ($this->is_enabled('gd-announcements-enable' )){
           $post_type_array[] = [
             'name'          =>'GD Updates',
@@ -148,6 +149,7 @@ class Controller
             'public'        => false
           ];
         }
+        */
         $this->posttypes = $post_type_array;
         $this->wp=$wp;
         //	Attach hooks

@@ -22,7 +22,8 @@
   {% endset %}
 {# **************** setting article content with summary #}
 	{% set articleContent %}
-    <h3 style="margin: -2px 0 24px; padding-top: 0;" class="hidden-sm hidden-xs">{{image.title}}</h3>
+    <h4 style="margin: -2px 0 24px; padding-top: 0;" class="hidden-sm hidden-xs media-kit-title">{{image.title}}</h4>
+    {% if image.caption %}<p class="mediakit-caption">{{image.caption}}</p>{% endif %}
     <a href="javascript:void(0);" class="btn btn-primary btn-sm script-clone">Click to Enlarge</a>
     <span class="seperator">  </span>
     <a href="{{image.large}}" target="_blank" class="btn btn-primary btn-sm" alt="{{image.title}}">Download High-Res</a>

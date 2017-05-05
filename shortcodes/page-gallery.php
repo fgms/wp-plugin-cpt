@@ -14,12 +14,14 @@ call_user_func(function () {
 
 		$feature_enable = empty($atts['feature']) ? false : ($atts['feature'] == 'true');
 		$filter_enable = empty($atts['filters']) ? true : ($atts['filters'] == 'true');
+		$limit = empty($atts['limit']) ? 500 : intval($atts['limit']) ;
+		$thumb_size = empty($atts['thumb_size']) ? 'medium' :  $atts['thumb_size']; // thumbnail, medium, large, full
 		$images = [];
 		$items = [];
 		$gallery = [
 		  'filter' =>  ['enable' => $filter_enable,],
 		  'filters' => [],
-		  'options' => ['limit' => 500,'random'=> $random,'thumbs_per_row' => get_post_meta($id,'thumbs-per-row', '5'),	'feature' => $feature_enable],
+		  'options' => ['limit' => $limit,'random'=> $random,'thumbs_per_row' => get_post_meta($id,'thumbs-per-row', '5'),	'feature' => $feature_enable],
 		  'images' => &$images
 		];
 		$retr = 'Not a valid ID';
@@ -48,7 +50,7 @@ call_user_func(function () {
 				//means is file.
 				if ( (!empty($item['id'])) or (!empty($item['thumb_id'])) ) {
 					$thumb = (! empty($item['thumb_id'])) ? wp_get_attachment_image_src($item['thumb_id'])[0]: null;
-					$medium= wp_get_attachment_image_src($item['id'],'medium')[0];
+					$medium= wp_get_attachment_image_src($item['id'],$thumb_size)[0];
 					$large= wp_get_attachment_image_src($item['id'],'large')[0];
 					$full= wp_get_attachment_image_src($item['id'],'full')[0];
 					if (!empty($item['thumb_id'])){
@@ -58,19 +60,21 @@ call_user_func(function () {
 					}
 					$youtube=(empty($item['youtubeid'])) ? false : $item['youtubeid'];;
 					$title=get_the_title($item['id']);
+					$caption = get_the_excerpt($item['id']);
 
 				}
 				//means interal
 				else {
 					if ( (!empty($item['image'][0])) or (!empty($item['youtubeid'])) ){
             $thumb =  (! empty ($item['thumb'][0])) ?  wp_get_attachment_image_src($item['thumb'][0])[0] : null;
-						$medium = wp_get_attachment_image_src($item['image'][0],'medium')[0];
+						$medium = wp_get_attachment_image_src($item['image'][0],$thumb_size)[0];
 						$large = wp_get_attachment_image_src($item['image'][0],'large')[0];
 						if (!empty($item['thumb'][0])){
 							$medium_override =  wp_get_attachment_image_src($item['thumb'][0], 'full')[0];
 						}
 						$full = wp_get_attachment_image_src($item['image'][0], 'full')[0];
 						$title = get_the_title($item['image'][0]);
+						$caption = get_the_excerpt($item['image'][0]);
 						$youtube = (empty($item['youtubeid'])) ? false : $item['youtubeid'];
 					}
 				}
@@ -92,7 +96,7 @@ call_user_func(function () {
           'thumb' => empty($thumb) ? $medium : $thumb,
           'medium'=> empty($thumb) ? $large : $medium_override,
           'large' => $full,
-          /*'caption' => (empty($item['caption'])) ? false : $item['caption'],*/
+          'caption' => $caption,
           'title' => $title,
           'filters'=> $filter,
           'youtubeid' => $youtube,

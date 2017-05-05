@@ -217,6 +217,7 @@ class Controller
               'menu_icon'           =>$posttype['menu_icon'],
               'has_archive'         => empty($posttype['has_archive']) ? true : $posttype['has_archive'] ,
               'hierarchical'        => true,
+              'rewrite'             => ['with_front' => false],
               'supports'            => empty($posttype['supports']) ? array('title','editor','page-attributes','revisions','excerpt','thumbnail') : $posttype['supports']
           ]);
         }

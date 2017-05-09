@@ -1,0 +1,28 @@
+{% set specials = function('get_fg_post_type', 'special', 100) %}
+<script type="text/javascript">
+jQuery(function($){
+  if ( ( typeof fgms === 'object') && (typeof fgms.add_special === 'function') ){
+    var fgms_specials = [];
+    {% for special in specials %}
+      {% set feature_image = false %}
+      {% set img_id = special.get_field('fg-widget-images') %}
+      {% if img_id is iterable %}{% set img_id = img_id | first %}{% endif %}
+      {% if  img_id + 0 > 0 %}
+        {% set feature_image = TimberImage(img_id) %}
+      {% endif %}
+      {% set sc %}
+        {{special.get_field('fg-summary')|striptags|truncate(30)}}
+        {% if special.get_field('fg-booking-code') %}<div style="padding-top: 15px;" class="booking-code">Use the promotion code <strong>{{special.get_field('fg-booking-code')}}</strong></div>{% endif %}
+        {% if special.get_field('fg-booking-url') %}<div style="padding-top: 15px;" class="booking-url"><a href="{{special.get_field('fg-booking-url')}}" target="_blank" class="btn btn-primary">{{special.get_field('fg-hover-button-text') | default('Learn More')}}</a></div>{% endif %}
+     {% endset %}
+      fgms_specials.push({
+        title : '{{special.title |e('js')}}',
+        subtitle : '{{special.get_field('intro-text')|e('js')}}',
+        content : '{{sc|e('js')|trim}}',
+        img : '{{feature_image.src}}'
+      })
+    {% endfor %}
+    fgms.add_special(fgms_specials);
+  }
+})
+</script>

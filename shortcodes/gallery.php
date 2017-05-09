@@ -18,7 +18,7 @@
           $thumb = empty($atts['thumb']) ? $matches[1] :trim($atts['thumb']);
           $post_id = url_to_postid($matches[1]);
           $retr = '<div style="width: '.$width.';height:'.$height.'" class="script-gallery-action"><a title="'. $alt. '" href="'. $matches[1] .'" data-smoothzoom="' .$group.'"> ';
-          $retr .= '<img src="'.  $thumb. '" alt="'.  $alt .'" class="'. $class .'"  />';
+          $retr .= '<img src="'.  $thumb. '" alt="'.  $alt .'" title="' . $alt . '" class="'. $class .'"  />';
           $retr .= '</a></div>';
       }
 			return $retr ;

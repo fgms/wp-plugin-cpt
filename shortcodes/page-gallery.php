@@ -11,7 +11,7 @@ call_user_func(function () {
 		if (is_array(get_post_meta($id,'randomize', false))){
 			$random = (get_post_meta($id,'randomize', false)[0] == 'yes');
 		}
-
+		$group = empty($atts['group']) ? 'group_default' :  $atts['group'];
 		$feature_enable = empty($atts['feature']) ? false : ($atts['feature'] == 'true');
 		$filter_enable = empty($atts['filters']) ? true : ($atts['filters'] == 'true');
 		$limit = empty($atts['limit']) ? 500 : intval($atts['limit']) ;
@@ -100,7 +100,7 @@ call_user_func(function () {
           'title' => $title,
           'filters'=> $filter,
           'youtubeid' => $youtube,
-					'group' => 'group'
+					'group' => $group
         ];
       }
 			$template = 'page-gallery.twig';

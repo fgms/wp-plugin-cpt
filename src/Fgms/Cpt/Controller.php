@@ -27,7 +27,8 @@ class Controller
             'post_type'     =>'testimonial',
             'domain'        =>'testimonial',
             'menu_icon'     =>'dashicons-groups',
-            'supports'      => array('title','page-attributes')
+            'supports'      => array('title','page-attributes'),
+            'public'        => false
           ];
         }
         if ($this->is_enabled('specials-enable' )){

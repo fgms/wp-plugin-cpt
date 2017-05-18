@@ -1,7 +1,7 @@
 {% set specials = function('get_fg_post_type', 'special', 100) %}
 <script type="text/javascript">
 jQuery(function($){
-  if ( ( typeof fgms === 'object') && (typeof fgms.add_special === 'function') ){
+  if ( ( typeof fgms === 'object') && (typeof fgms.get_specials === 'function') ){
     var fgms_specials = [];
     {% for special in specials %}
       {% set feature_image = false %}
@@ -21,8 +21,8 @@ jQuery(function($){
         content : '{{sc|e('js')|trim}}',
         img : '{{feature_image.src}}'
       })
-    {% endfor %}
-    fgms.add_special(fgms_specials);
+    {% endfor %}  
+    fgms.get_specials(fgms_specials);
   }
 })
 </script>

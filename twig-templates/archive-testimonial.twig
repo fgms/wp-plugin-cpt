@@ -27,8 +27,8 @@
 		{% elseif article.content | length > 10 %}
 			{{article.content | striptags| truncate(35) }}
 		{% elseif article.get_field('fg-summary') %}
-			{{article.get_field('fg-summary') | striptags | truncate(35) }}
-		{% endif %}		
+			{{article.get_field('fg-summary') | striptags  }}
+		{% endif %}
 		{% include "article/article-footer.twig" with { article : article } only %}
 	{% endset %}
 	{% set obj = {article : article, articleContent: articleContent, post_date: article.get_field('fg-timestamp')|date, no_link: true}|merge(article_object) %}

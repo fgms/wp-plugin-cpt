@@ -95,7 +95,9 @@ call_user_func(function () {
 		        }
 					}
 					else {
-						$gallery['filters'][slugify($item['fg-filters'])] = $item['fg-filters'];
+						$slug = slugify($item['fg-filters']);
+						$gallery['filters'][$slug] = $item['fg-filters'];
+						$filter[] = $slug;
 					}
 
 				}

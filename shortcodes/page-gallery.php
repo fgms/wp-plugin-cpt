@@ -47,6 +47,8 @@ call_user_func(function () {
 
       foreach ( $items as $item){
 				$thumb=null; $medium=null; $large=null; $full=null; $title=null; $youtube=null;
+
+				$caption="";
 				//means is file.
 				if ( (!empty($item['id'])) or (!empty($item['thumb_id'])) ) {
 					$thumb = (! empty($item['thumb_id'])) ? wp_get_attachment_image_src($item['thumb_id'])[0]: null;
@@ -82,26 +84,36 @@ call_user_func(function () {
 				// filters
         $filter = [];
 				if (!empty($item['fg-filters'])){
-					foreach ($item['fg-filters'] as $f){
-						if (strlen(trim($f)) > 0){
-							// this adds the filter to list
-	            $slug = slugify($f);
-	            $gallery['filters'][$slug] =$f;
-	            $filter[] = $slug;
-						}
-	        }
+					if (is_array($item['fg-filters'])){
+						foreach ($item['fg-filters'] as $f){
+							if (strlen(trim($f)) > 0){
+								// this adds the filter to list
+		            $slug = slugify($f);
+		            $gallery['filters'][$slug] =$f;
+		            $filter[] = $slug;
+							}
+		        }
+					}
+					else {
+						$gallery['filters'][slugify($item['fg-filters'])] = $item['fg-filters'];
+					}
+
+				}
+				// in case it was created but no images were added.
+				if (empty($thumb) ? $medium : $thumb !== null){
+					$images[] = [
+	          'thumb' => empty($thumb) ? $medium : $thumb,
+	          'medium'=> empty($thumb) ? $large : $medium_override,
+	          'large' => $full,
+	          'caption' => $caption,
+	          'title' => $title,
+	          'filters'=> $filter,
+	          'youtubeid' => $youtube,
+						'group' => $group,
+						'diag' => $item
+	        ];
 				}
 
-        $images[] = [
-          'thumb' => empty($thumb) ? $medium : $thumb,
-          'medium'=> empty($thumb) ? $large : $medium_override,
-          'large' => $full,
-          'caption' => $caption,
-          'title' => $title,
-          'filters'=> $filter,
-          'youtubeid' => $youtube,
-					'group' => $group
-        ];
       }
 			$template = 'page-gallery.twig';
 			$isempty = get_post_meta($id,'gallery_type');

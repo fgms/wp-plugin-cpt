@@ -1,18 +1,12 @@
 <?php
 /*
-Title: Defaults
-Setting: realestate_settings
-Order: 10
+Title: Sidebar Configuration
+Post Type: page
+Order: 45
+Collapse: false
+Priority: low
+Context: side
 */
-
-piklist('field',[
-  'type' => 'text',
-  'field'=> 'realestate_units',
-  'value' => 'Euros',
-  'label' => __('Price Units'),
-  'description' => ''
-]);
-
 $piklist_editor_options = array( // Pass any option that is accepted by wp_editor()
       'wpautop' => false,
       'media_buttons' => true,

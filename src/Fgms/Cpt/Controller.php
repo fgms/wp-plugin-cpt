@@ -113,44 +113,7 @@ class Controller
             'public'        => true
           ];
         }
-        /*
-        if ($this->is_enabled('gd-announcements-enable' )){
-          $post_type_array[] = [
-            'name'          =>'GD Updates',
-            'singular_name' =>'GD Update',
-            'post_type'     =>'dir-announcement',
-            'domain'        =>'fgms-dir-announcement',
-            'menu_icon'     =>'dashicons-index-card',
-            'supports'      => array('title', 'editor'),
-            'exclude_from_search'        => true,
-            'public'        => false
-          ];
-        }
-        if ($this->is_enabled('gd-activities-enable' )){
-          $post_type_array[] = [
-            'name'          =>'GD Activities',
-            'singular_name' =>'GD Activity',
-            'post_type'     =>'dir-activity',
-            'domain'        =>'fgms-activity',
-            'menu_icon'     =>'dashicons-index-card',
-            'supports'      => array('title'),
-            'exclude_from_search'        => true,
-            'public'        => false
-          ];
-        }
-        if ($this->is_enabled('gd-dining-enable' )){
-          $post_type_array[] = [
-            'name'          =>'GD Dining',
-            'singular_name' =>'GD Dining',
-            'post_type'     =>'dir-dining',
-            'domain'        =>'fgms-dining',
-            'menu_icon'     =>'dashicons-index-card',
-            'supports'      => array('title'),
-            'exclude_from_search'        => true,
-            'public'        => false
-          ];
-        }
-        */
+
         $this->posttypes = $post_type_array;
         $this->wp=$wp;
         //	Attach hooks
@@ -158,7 +121,6 @@ class Controller
 
         // updating index for Real Estate.
         add_filter('manage_real-estate_posts_columns', function($defaults){
-
             unset($defaults['date']);
             unset($defaults['wpseo-score']);
             unset($defaults['wpseo-score-readability']);
@@ -180,17 +142,102 @@ class Controller
           if ($column_name == 'price'){  echo get_post_meta($post_ID, 'condo-price', true) . ' '. $options['realestate_units']; }
           if ($column_name == 'status'){  echo ucfirst(get_post_meta($post_ID, 'condo-status', true)); }
        }, 10, 2);
+       //testimonialsa
+        add_filter('manage_testimonial_posts_columns', function($defaults){
+          unset($defaults['date']);
+          unset($defaults['wpseo-score']);
+          unset($defaults['wpseo-score-readability']);
+          $defaults['fg-date'] = 'Testimonial Date';
+          $defaults['source'] = 'Source';
+          $defaults['snippet'] = 'Snippet';
+          return $defaults;
+        }, 20);
+        add_action('manage_testimonial_posts_custom_column', function($column_name,$post_ID){
+          if ($column_name == 'fg-date'){  echo get_post_meta($post_ID, 'fg-date', true); }
+          if ($column_name == 'source'){  echo ucfirst(get_post_meta($post_ID, 'fg-source-type', true)); }
+          if ($column_name == 'snippet'){  echo strip_tags(addslashes(get_post_meta($post_ID, 'fg-summary', true))) ; }
 
-        add_action( 'template_redirect', function() {
-           if ( is_singular('real-estate') ) {
-             wp_redirect( get_post_type_archive_link('real-estate'), 302 );
-             exit;
-           }
-           elseif (is_singular('newsletter')){
-             wp_redirect( get_post_type_archive_link('newsletter'), 302 );
-             exit;
-           }
-         });
+       }, 10, 2);
+      // specials
+       add_filter('manage_special_posts_columns', function($defaults){
+         unset($defaults['date']);
+         unset($defaults['wpseo-score']);
+         unset($defaults['wpseo-score-readability']);
+         $defaults['active'] = 'Home Page';
+         $defaults['start_date'] = 'Start Date';
+         $defaults['end_date'] = 'End Date';
+         $defaults['code'] = 'Promo Code';
+         $defaults['intro'] = 'Introduction';
+         $defaults['image'] = 'Image';
+         return $defaults;
+       }, 20);
+       add_action('manage_special_posts_custom_column', function($column_name,$post_ID){
+         if ($column_name == 'active'){  echo ucfirst(get_post_meta($post_ID, 'fg-widget-enable', true)); }
+         if ($column_name == 'start_date'){  echo get_post_meta($post_ID, 'fg-start-date', true); }
+         if ($column_name == 'end_date'){  echo get_post_meta($post_ID, 'fg-end-date', true); }
+         if ($column_name == 'code'){  echo get_post_meta($post_ID, 'fg-booking-code', true); }
+         if ($column_name == 'intro'){  echo strip_tags(addslashes(get_post_meta($post_ID, 'intro-text', true))) ; }
+         if ($column_name == 'image'){  echo wp_get_attachment_image(get_post_meta($post_ID, 'fg-widget-images', true)); }
+
+      }, 10, 2);
+      // Galleries
+      add_filter('manage_gallery_posts_columns', function($defaults){
+        unset($defaults['date']);
+        unset($defaults['wpseo-score']);
+        unset($defaults['wpseo-score-readability']);
+        $defaults['randomize'] = 'Randomize';
+        $defaults['type'] = 'Type';
+        $defaults['yaml'] = 'Yaml/Internal';
+        $defaults['image'] = 'Image';
+        $defaults['count'] = 'Image Count';
+        return $defaults;
+      }, 20);
+      add_action('manage_gallery_posts_custom_column', function($column_name,$post_ID){
+        $group_data = get_post_meta($post_ID,'cp_gallery',true);
+        $group_data = maybe_unserialize($group_data);
+        $first_data = $group_data[0];
+        $image = false;
+        if (! empty ($first_data['image'][0])) {
+          $image = $first_data['image'][0];
+        }
+        if ($column_name == 'shortcode'){  echo '[page_gallery id="'.$post_ID.'"]'; }
+        if ($column_name == 'randomize'){  echo get_post_meta($post_ID, 'randomize', true); }
+        if ($column_name == 'type'){  echo ucfirst(get_post_meta($post_ID, 'gallery_type', true)); }
+        if ($column_name == 'yaml'){  echo ucfirst(get_post_meta($post_ID, 'database-or-yaml', true)); }
+        if ($image !== false){
+          if ($column_name == 'image'){  echo wp_get_attachment_image($image); }
+        }
+
+        if ($column_name == 'count'){  echo ($image) ? count($group_data): 0; }
+
+     }, 10, 2);
+     // Media Clippings
+      add_filter('manage_media-clip_posts_columns', function($defaults){
+        unset($defaults['date']);
+        unset($defaults['wpseo-score']);
+        unset($defaults['wpseo-score-readability']);
+        $defaults['pub_date'] = 'Date';
+        $defaults['publisher'] = 'Publisher';
+        $defaults['image'] = 'Logo';
+        $defaults['summary'] = 'Summary';
+        return $defaults;
+      }, 20);
+      add_action('manage_media-clip_posts_custom_column', function($column_name,$post_ID){
+        if ($column_name == 'pub_date'){  echo ucfirst(get_post_meta($post_ID, 'fg-date', true)); }
+        if ($column_name == 'publisher'){  echo get_post_meta($post_ID, 'fg-publisher', true); }
+        if ($column_name == 'image'){  echo wp_get_attachment_image(get_post_meta($post_ID, 'clipping-logo', true)); }
+        if ($column_name == 'summary'){  echo get_post_meta($post_ID, 'fg-summary', true); }
+     }, 10, 2);
+    add_action( 'template_redirect', function() {
+       if ( is_singular('real-estate') ) {
+         wp_redirect( get_post_type_archive_link('real-estate'), 302 );
+         exit;
+       }
+       elseif (is_singular('newsletter')){
+         wp_redirect( get_post_type_archive_link('newsletter'), 302 );
+         exit;
+       }
+     });
     }
 
     private function is_enabled($opt, $default=false){

@@ -4,6 +4,7 @@
 {% set content %}
 {% set options = function('get_option', 'realestate_settings') %}
 <h1 class="archive-title">{{archive_title}}</h1>
+{% include 'archive-real-estate-header.twig' ignore missing %}
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -44,11 +45,16 @@
     </tbody>
   </table>
 </div>
+{% include 'archive-real-estate-footer.twig' ignore missing %}
 {% endset %}
-
+{% set before = options['sidebar-before-menu-editor'] %}
+{% set after  = options['sidebar-after-menu-editor'] %}
+{% set s_menu = options['sidebar-override-menu'] %}
+{% set sidebar_override = options['sidebar-override']  == 'yes' %}
 {% include 'base-page.twig' with {
-	page_class_content : 'col-sm-12',
-	page_content : content
+	page_class_content : sidebar_override ? config.settings.page.grid.left.class ~' content-has-sidebar' : 'col-sm-12',
+	page_class_sidebar : sidebar_override ? config.settings.page.grid.right.class : false,
+	page_content : content,
 	}
 %}
 {% endblock %}

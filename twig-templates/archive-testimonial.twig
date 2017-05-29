@@ -1,0 +1,50 @@
+{% extends 'base.twig' %}
+{% block content %}
+
+
+{% set page_content_class = config.settings.article.grid.left.class %}
+{% if function('is_post_type_archive','special') %}
+	{% set page_content_class = 'col-sm-12' %}
+	{% set article_object = {
+		class : "article-page-default"
+	} %}
+{% else %}
+	{% set page_class_sidebar = config.settings.article.grid.right.class %}
+	{% set page_widget_sidebar %}{% include 'blog-sidebar.twig' %}{% endset %}
+	{% set article_object = {
+		class : "article-page-default article-blog"
+	} %}
+{% endif %}
+
+{% set content %}
+<h1 >{{archive_title | default('Blog')}}</h1>
+
+<ul id="blog-articles">
+{% for article in function('get_fg_post_type','testimonial',100, 'meta_value','DESC', 'fg-timestamp') %}
+	{% set articleContent %}
+		{% if article.excerpt | length > 0 %}
+			{{ article.excerpt | striptags}}
+		{% elseif article.content | length > 10 %}
+			{{article.content | striptags| truncate(35) }}
+		{% elseif article.get_field('fg-summary') %}
+			{{article.get_field('fg-summary') | striptags | truncate(35) }}
+		{% endif %}		
+		{% include "article/article-footer.twig" with { article : article } only %}
+	{% endset %}
+	{% set obj = {article : article, articleContent: articleContent, post_date: article.get_field('fg-timestamp')|date, no_link: true}|merge(article_object) %}
+	<li>{% include "article/article-content.twig" with obj only %}</li>
+{% endfor %}
+</ul>
+{% include 'pagination.twig' %}
+{% endset %}
+
+
+
+{% include 'base-page.twig' with {
+	page_class_content : page_content_class,
+	page_class_sidebar : page_class_sidebar,
+	page_widget_sidebar: page_widget_sidebar,
+	page_content : content
+	}
+%}
+{% endblock %}

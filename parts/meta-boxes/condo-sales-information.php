@@ -39,7 +39,8 @@ piklist('field',[
     'ground'  => 'Ground',
     'first'   => 'First Floor',
     'second'  => 'Second Floor',
-    'third'  => 'Third Floor'
+    'third'  => 'Third Floor',
+    'fourth' => 'Fourth Floor'
   ],
   'conditions' => [
     [
@@ -60,7 +61,8 @@ piklist('field',[
     '1 Bedroom' => '1 Bedroom',
     'One Bedroom w/ Loft' => 'One Bedroom w/ Loft',
     '2 Bedroom' => '2 Bedrooms',
-    'Two Bedroom w/ Loft' => 'Two Bedroom w/ Loft'
+    'Two Bedroom w/ Loft' => 'Two Bedroom w/ Loft',
+    'Penthouse' => 'Penthouse'
   ],
   'value' => 'Studio',
   'columns' => 4

@@ -14,7 +14,7 @@ function get_gallery_fields($group='') {
     $filters = get_galllery_filters();
     $group = (strlen($group) > 0 ) ? $group.':': $group;
     $fields = [
-
+/*
         [
           'type' => 'radio',
           'field' => 'image-or-youtube-radio',
@@ -26,33 +26,22 @@ function get_gallery_fields($group='') {
           'value' => 'image',
           'columns' => 2
 
-        ],
+        ],*/
         [
             'type' => 'file',
             'field' => 'image',
-            'label' => 'Image',
-            'options' => array('button' => 'Add Image'),
+            'label' => 'ADD Image',
+            'options' => array('button' => 'Select ...'),
             'preview_size' =>'thumb',
             'columns' => 3,
-            'conditions' => [
-                [
-                  'field' => $group . 'image-or-youtube-radio',
-                  'value' => 'image'
-                ]
-            ],
         ],
         [
             'type' => 'text',
-            'label' => __('Youtube ID'),
+            'label' => __('OR ADD Youtube ID'),
             'description' => '',
             'field' => 'youtubeid',
             'columns' => 3,
-            'conditions' => [
-                [
-                  'field' => $group . 'image-or-youtube-radio',
-                  'value' => 'youtube'
-                ]
-            ],
+
 
         ],
         [
@@ -65,11 +54,11 @@ function get_gallery_fields($group='') {
         [
             'type' => 'file',
             'field' => 'thumb',
-            'label' => 'Medium/Thumb Override',
+            'label' => 'OPTIONAL - Image Override (replaces thumb and medium sizes)',
             'description' => __('Only use if you want need to override automatic medium / thumb.'),
-            'options' => array('button' => 'Add Image'),
+            'options' => array('button' => 'Select ...'),
             'preview_size' =>'piklist',
-            'columns' => 2,
+            'columns' => 5,
         ],
     ];
     return $fields;

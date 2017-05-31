@@ -129,6 +129,7 @@ class Controller
             $defaults['views'] = 'View | Type';
             $defaults['price'] = 'Price';
             $defaults['status'] = 'Status';
+            $defaults['display'] = 'Display Type';
             return $defaults;
         }, 20);
         add_action('manage_real-estate_posts_custom_column', function($column_name,$post_ID){
@@ -141,6 +142,15 @@ class Controller
           if ($column_name == 'views'){  echo get_post_meta($post_ID, 'condo-view', true) . $style ; }
           if ($column_name == 'price'){  echo get_post_meta($post_ID, 'condo-price', true) . ' '. $options['realestate_units']; }
           if ($column_name == 'status'){  echo ucfirst(get_post_meta($post_ID, 'condo-status', true)); }
+          if ($column_name == 'display'){
+            $display_type = get_post_meta($post_ID, 'condo-display-type', true);
+            if ($display_type == 'pdf' ){
+              $pdf_id = get_post_meta($post_ID,'fg-pdf',true);
+              $display_type = '<a href="'. wp_get_attachment_url($pdf_id) . '" target="_blank">' . basename(get_attached_file($pdf_id)) . '</a>';
+            }
+            echo $display_type;
+
+          }
        }, 10, 2);
        //testimonialsa
         add_filter('manage_testimonial_posts_columns', function($defaults){

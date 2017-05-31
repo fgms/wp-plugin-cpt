@@ -1,25 +1,13 @@
 <?php
 /*
-Title: Condo Sales Information
+Title: Real Estate Information
 Post Type: real-estate
 Order: 10
 Collapse: false
 Priority: high
 */
 
-$piklist_editor_options = array( // Pass any option that is accepted by wp_editor()
-      'wpautop' => false,
-      'media_buttons' => true,
-      'shortcode_buttons' => true,
-      'teeny' => true,
-      'dfw' => false,
-      'quicktags' => true,
-      'drag_drop_upload' => true,
-      'tinymce' => array(
-        'resize' => false,
-        'wp_autoresize_on' => true
-      )
-    );
+
 piklist('field',[
   'type' => 'select',
   'label' => __('Type'),
@@ -103,18 +91,9 @@ piklist('field',[
   'columns' => 4
 ]);
 
-piklist('field', [
-    'type' => 'file',
-    'field' => 'location-map',
-    'label' => 'Location Map',
-    'options' => array('button' => 'Add Image'),
-    'columns' => 12
-]);
-
 piklist('field',[
-  'type' => 'editor',
-  'field' => 'fg-summary',
-  'label' => __('Summary'),
-  'description'=> __(''),
-  'options' => $piklist_editor_options
+  'type' => 'text',
+  'label' => __('Index details'),
+  'field' => 'condo-index-details',
+  'columns' => 12
 ]);

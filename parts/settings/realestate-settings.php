@@ -66,7 +66,35 @@ piklist('field',  [
       ]
     ]
 ]);
+piklist('field',[
+  'type' => 'text',
+  'label' => __('Index Title'),
+  'field' => 'realestate_title',
+  'columns' => 12
+]);
+piklist('field',[
+  'type' => 'editor',
+  'field' => 'realestate_pre_text',
+  'label' => __('Index Pre Text'),
+  'description'=> __(''),
+  'options' => $piklist_editor_options
+]);
 
+piklist('field',[
+  'type' => 'editor',
+  'field' => 'realestate_post_text',
+  'label' => __('Index Post Text'),
+  'description'=> __(''),
+  'options' => $piklist_editor_options
+]);
+
+piklist('field',[
+  'type' => 'editor',
+  'field' => 'realestate_call_to_action',
+  'label' => __('Display Page Call To Action'),
+  'description'=> __(''),
+  'options' => $piklist_editor_options
+]);
 /*
 piklist('field',  [
     'type' => 'editor',

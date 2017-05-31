@@ -12,14 +12,18 @@
         <div style="margin: 15px 0;">
           <table class="table table-condensed">
             <tbody>
+              {% if post.get_field('fg-booking-start-date') and post.get_field('fg-booking-end-date') %}
               <tr>
                 <td style="border-top: 0; width: 30%; padding:6px 6px 6px 0;">Booking Window:</td>
                 <td style="border-top: 0;padding: 6px;"><strong>{{post.get_field('fg-booking-start-date')}} - {{post.get_field('fg-booking-end-date')}}</strong></td>
               </tr>
+              {% endif %}
+              {% if post.get_field('fg-start-date') and post.get_field('fg-end-date') %}
               <tr>
                 <td style="border-top: 0; padding:6px 6px 6px 0;">Stay Window:</td>
                 <td style="border-top: 0;padding: 6px;"><strong>{{post.get_field('fg-start-date')}} - {{post.get_field('fg-end-date')}}</strong></td>
               </tr>
+              {% endif %}
             </tbody>
           </table>
         </div>

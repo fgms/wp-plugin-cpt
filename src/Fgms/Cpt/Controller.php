@@ -233,10 +233,11 @@ class Controller
         return $defaults;
       }, 20);
       add_action('manage_media-clip_posts_custom_column', function($column_name,$post_ID){
-        if ($column_name == 'pub_date'){  echo ucfirst(get_post_meta($post_ID, 'fg-date', true)); }
-        if ($column_name == 'publisher'){  echo get_post_meta($post_ID, 'fg-publisher', true); }
-        if ($column_name == 'image'){  echo wp_get_attachment_image(get_post_meta($post_ID, 'clipping-logo', true)); }
-        if ($column_name == 'summary'){  echo get_post_meta($post_ID, 'fg-summary', true); }
+
+        if ($column_name == 'pub_date'){  echo ucfirst($this->get_meta($post_ID, 'fg-date')); }
+        if ($column_name == 'publisher'){  echo $this->get_meta($post_ID, 'fg-publisher'); }
+        if ($column_name == 'image'){  echo wp_get_attachment_image($this->get_meta($post_ID, 'clipping-logo')); }
+        if ($column_name == 'summary'){  echo $this->get_meta($post_ID, 'fg-summary'); }
      }, 10, 2);
     add_action( 'template_redirect', function() {
        if ( is_singular('real-estate') ) {
@@ -250,6 +251,10 @@ class Controller
      });
     }
 
+    private function get_meta($id, $key){
+      $val = get_post_meta($id, $key, true);
+      return empty($val) ? '' : $val;
+    }
     private function is_enabled($opt, $default=false){
       $theme_options = get_option('cpt_settings');
       if (!empty($theme_options[$opt])){

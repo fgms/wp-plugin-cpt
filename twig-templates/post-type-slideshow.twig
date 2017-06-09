@@ -1,0 +1,97 @@
+{% macro validate(slideshow)%}
+    {% set id = '' %}
+    {% if slideshow['slide-or-image-radio'] | first == 'slideshow' %}
+        {% if slideshow['slideshow-list'] | length > 0 %}
+            {% set id = slideshow['slideshow-list'] %}
+        {% endif %}
+    {% else %}
+        {% if slideshow['feature-image'] | first | length > 0 %}
+            {% set id = slideshow['feature-image'] |  randomize | first %}
+        {% endif %}
+    {% endif %}
+    {{id}}
+{% endmacro %}
+{% import _self as macro_slideshow %}
+
+{% set slideshow = post.get_field('slideshow') %}
+{% set slideshow_options = function('get_option','slideshow_settings') %}
+{# ********* logic to select slideshows requires more elseif if add more options
+        {% if slideshow %}
+
+        {% elseif function('is_front_page') %}
+            {% set slideshow = slideshow_options.home %}
+        {% else %}
+        {% endif %}
+#}
+
+{# ******* validates logic for fallbacks #}
+
+{# in case it is initally null meaning never saved with options in post. #}
+{% if slideshow == false %}{% set slideshow = slideshow_options.defaults %}{% endif %}
+{# See if an id comes back #}
+{% set post_id = macro_slideshow.validate(slideshow) | trim %}
+{# Means i need to use defaults.#}
+{% if post_id  | length == 0 %}
+    {% set slideshow = slideshow_options.defaults %}
+    {% set post_id = macro_slideshow.validate(slideshow) | trim %}
+{% endif %}
+
+
+{# ******* Here is where the logic starts either feature image or slideshow #}
+
+{% if slideshow['slide-or-image-radio'] | first == 'slideshow' %}
+    {% set slideshow_post = function('Timber::get_post',post_id) %}
+    {% set slide_id %}{% if function('is_front_page') %}homepage-slideshow{% else %}secondary-slideshow{% endif %}{% endset %}
+    {% set slides = slideshow_post.get_field('slides')%}
+    {% set slideitems = [] %}
+    {% for slide in slides %}
+      {% set image = TimberImage(slide['slide-image'] | first) %}
+      {% if  slide['internal']  > 0 %}
+        {% set link = function('get_permalink',slide['internal'])  %}
+      {% elseif slide['external'] | length > 0  %}
+        {% set link = slide['external'] %}
+      {% else %}
+        {% set link = null %}
+      {% endif %}
+
+      {% set slideitems = [{
+          'link'  : link,
+          'title' : image.caption,
+          'alt'   : image.alt,
+          'url'   : image.src
+      }] | merge(slideitems)%}
+    {% endfor %}
+    {% set youtube_background = TimberImage(slideshow_post.get_field('youtube_background'))%}
+    {% set featureCarousel = {
+        'id' : slide_id,
+        'controls' : true,
+        'indicators' : false,
+        'captions' : false,
+        'imageAsBackground' : true,
+        'titles' : false,
+        'interval' : slideshow_post.get_field('slidedelay'),
+        'root' : '',
+        'outer_class' : 'feature-carousel carousel-fade',
+        'items' : slideitems | reverse,
+        'youtube_enable' : slideshow_post.get_field('youtube_enable'),
+        'youtube_id' : slideshow_post.get_field('youtube_id'),
+        'youtube_properties' : slideshow_post.get_field('youtube_properties'),
+        'youtube_filters' : slideshow_post.get_field('youtube_filters'),
+        'youtube_background' : youtube_background.src|resize(600)
+
+    }
+    %}
+
+    {% if featureCarousel is iterable and featureCarousel.items is iterable %}
+        {% include 'bootstrap-carousel.twig' with featureCarousel only %}
+    {% endif %}
+
+{% else %}
+    {% set feature_img = TimberImage(post_id) %}
+    <div class="single-feature-image"  data-background="{{feature_img.src}}">
+    {% if imagecaption %}
+        <span class=""></span>
+        <div class="single-feature-image-caption">{{imagecaption}}</div>
+    {% endif %}
+    </div>
+{% endif %}

@@ -4,10 +4,12 @@
 {#**************  Setting Gallery and intro text #}
 
 {% set content_pre %}
+  <div class="h3 special-subtitle">{{post.get_field('fg-subtitle')}}</div>
   {% set sidebar_gallery = post.get_field('sidebar-gallery') %}
   {% set hasgallery = sidebar_gallery + 0 > 0  %}
 
     <div {% if hasgallery %}class="has-sidebar"{% endif %}>
+
         {% if post.get_field('intro-text') %}<div class="intro-text ">{{post.get_field('intro-text')}}</div>{% endif %}
         <div style="margin: 15px 0;">
           <table class="table table-condensed">

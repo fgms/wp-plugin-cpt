@@ -33,11 +33,72 @@ piklist('field',[
     'field' => 'slidedelay',
     'label' => __('Slide Delay'),
     'description' => __('(IN MS)'),
-    'attributes' => array('placeholder' => 15000),
     'value'=>15000
-
+]);
+piklist('field', array(
+  'type' => 'select',
+  'field'=> 'youtube_enable',
+  'label' => __('Use Video'),
+  'description' => __('This enables youtube video on first slide'),
+  'choices' => [
+    'yes' => 'yes',
+    'no'  => 'no'
+  ],
+  'value' => 'no',
+));
+piklist('field',[
+    'type' => 'text',
+    'label' => __('Youtube ID'),
+    'description' => 'IE.. nY4uOZrzv0s',
+    'field' => 'youtube_id',
+    'columns' => 4,
+    'conditions' => [
+        [
+          'field' =>  'youtube_enable',
+          'value' => 'yes'
+        ]
+    ],
 
 ]);
+piklist('field',[
+    'type' => 'textarea',
+    'label' => __('Youtube Properties'),
+    'description' => '<a href="https://github.com/pupunzi/jquery.mb.YTPlayer/wiki" target="_blank">Documententation</a><br/>autoPlay:true,showControls:false,loop:true,startAt:0,endAt:20',
+    'field' => 'youtube_properties',
+    'columns' => 6,
+    'value' => 'autoPlay:true,showControls:false,loop:true,startAt:0,endAt:20',
+    'conditions' => [
+        [
+          'field' =>  'youtube_enable',
+          'value' => 'yes'
+        ]
+    ],
+]);
+piklist('field',[
+    'type' => 'file',
+    'field' => 'youtube_background',
+    'label' => 'Image',
+    'options' => array('button' => 'Add Image'),
+    'preview_size' =>'thumbnail',
+    'columns' => 3,
+
+]);
+/*
+piklist('field',[
+    'type' => 'textarea',
+    'label' => __('Youtube Properties'),
+    'description' => '<a href="https://github.com/pupunzi/jquery.mb.YTPlayer/wiki" target="_blank">Documententation</a>',
+    'field' => 'youtube_filters',
+    'columns' => 6,
+    'value' => 'autoPlay:true,showControls:false,loop:true,startAt:0,endAt:20',
+    'conditions' => [
+        [
+          'field' =>  'youtube_enable',
+          'value' => 'yes'
+        ]
+    ],
+]);
+*/
 piklist('field',[
     'type' => 'group',
     'field' => 'slides',
@@ -55,22 +116,20 @@ piklist('field',[
 
         ],
         [
-          'type' => 'radio',
-          'field' => 'radio-external-internal',
-          'label' => 'URL Type',
-          'choices' => [
-            'internal' => 'Internal',
-            'external' => 'External'
-          ],
-          'value' => 'internal',
-          'columns' => 2
+            'type' => 'select',
+            'label' => __('Internal URL'),
+            'description' => '',
+            'field' => 'internal',
+            'choices' => $choices_array,
+            'columns' => 4,
+
         ],
         [
             'type' => 'text',
-            'label' => __('External URL'),
+            'label' => __('OR External URL'),
             'description' => 'Enter full url.',
             'field' => 'external',
-            'columns' => 6,
+            'columns' => 4,
             'conditions' => [
                 [
                   'field' =>  'slides:radio-external-internal',
@@ -79,21 +138,7 @@ piklist('field',[
             ],
 
         ],
-        [
-            'type' => 'select',
-            'label' => __('Internal URL'),
-            'description' => '',
-            'field' => 'internal',
-            'choices' => $choices_array,
-            'columns' => 6,
-            'conditions' => [
-                [
-                  'field' =>  'slides:radio-external-internal',
-                  'value' => 'internal'
-                ]
-            ],
 
-        ],
 
     ]
 ]);

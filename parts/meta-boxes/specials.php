@@ -20,7 +20,12 @@ $piklist_editor_options = array( // Pass any option that is accepted by wp_edito
         'wp_autoresize_on' => true
       )
     );
-
+piklist('field',[
+  'type' => 'text',
+  'label' => __('Subtitle'),
+  'field' => 'fg-subtitle',
+  'columns' => 12
+]);
 piklist('field',[
   'type' => 'textarea',
   'label' => __('Intro Text'),

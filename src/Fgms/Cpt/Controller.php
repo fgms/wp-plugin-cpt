@@ -10,7 +10,7 @@ class Controller
     {
 
         $post_type_array = [];
-        if ($this->is_enabled('awards-enable',true )){
+        if ($this->is_enabled('awards-enable' )){
           $post_type_array[] = [
             'name'          =>'Awards',
             'singular_name' =>'Award',
@@ -244,7 +244,7 @@ class Controller
              $term_id = intval(get_post_meta($post_ID,'media-category',true));
              if ($term_id > 0){
                $term = get_term($term_id);
-               $new_count = $term->count;              
+               $new_count = $term->count;
              }
 
            }

@@ -25,7 +25,7 @@
 
 {# **************** setting article content with summary #}
 	{% set articleContent %}
-		{{article.get_field('fg-summary')|striptags| truncate(35) }} <a class="article-full-story-link"  href="{{article.link}}">View Special</a>
+		{{article.get_field('fg-summary')|striptags| truncate(35) }} {#<a class="article-full-story-link"  href="{{article.link}}">View Special</a>#}
 		<div style="padding-top: 12px;"><a href="{{article.link}}" class="btn btn-primary" >View Special</a></div>
 	{% endset %}
 

@@ -35,7 +35,7 @@ function setTimeStampMetaData($field,$id){
     }
   }
 }
-
+add_post_type_support( 'special', 'page-attributes' );
 add_action( 'pre_get_posts', function($query){
   if ($query->get('post_type') == 'media-clip'){
     $query->set('orderby' ,'meta_value');

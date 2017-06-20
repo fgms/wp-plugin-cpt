@@ -1,0 +1,73 @@
+{% extends 'base.twig' %}
+{% block content %}
+{% set page_content_class = config.settings.article.grid.left.class %}
+{% if function('is_post_type_archive','special') %}
+	{% set page_content_class = 'col-sm-12 ' %}
+	{% set article_object = {
+		class : "article-page-default"
+	} %}
+{% else %}
+	{% set page_class_sidebar = config.settings.article.grid.right.class %}
+	{% set page_widget_sidebar %}{% include 'blog-sidebar.twig' %}{% endset %}
+	{% set article_object = {
+		class : "article-page-default article-blog"
+	} %}
+{% endif %}
+
+{% set content %}
+<h1 >{{archive_title | default('Blog')}}</h1>
+
+<ul id="blog-articles">
+{% for article in posts %}
+  {% set feature_image = false %}
+  {% set img_id = article.get_field('fg-feature-image') %}
+  {% if img_id is iterable %}{% set img_id = img_id | first %}{% endif %}
+  {% if  img_id + 0 > 0 %}
+    {% set feature_image = TimberImage(img_id) %}
+  {% endif %}
+	{% set articleContent %}
+  <div style="font-size: 0.9em">{{article.get_field('fg-date')}}</div>
+  {% if article.get_field('fg-publisher') %}
+    {% if article.get_field('fg-publisher-link') %}<a href="{{article.get_field('fg-publisher-link')}}" target="_blank">{% endif %}
+    <div style="font-size: 0.9em;line-height: 1em;">{{article.get_field('fg-publisher')}}</div>
+    {% if article.get_field('fg-publisher-link') %}</a>{% endif %}
+  {% endif %}
+
+    <div class="award-summary" style="padding-top:12px;">{{article.get_field('fg-summary')}}</div>
+
+	{% endset %}
+  {% set class_main = feature_image ? 'col-sm-9 col-sm-pull-3' : 'col-sm-12' %}
+  {% if feature_image %}
+    {% set content_pre %}
+    <div class="col-sm-3 col-sm-push-9">
+      {% if article.get_field('fg-publisher-link') %}<a href="{{article.get_field('fg-publisher-link')}}" target="_blank">{% endif %}
+      <img style="margin: 0 0 12px;" class="img-responsive" src="{{feature_image.src}}" alt="Award {{article.title}}" />
+      {% if article.get_field('fg-publisher-link') %}</a>{% endif %}
+    </div>
+    {% endset %}
+  {% endif %}
+
+	{% set obj = {
+    article : article,
+    articleContent: articleContent,
+    class_container: 'row',
+    class_main: class_main,
+    content_pre : content_pre,
+    title: '<h2 style="margin-bottom: 0;">'~article.title ~'</h2>'}|merge(article_object)
+    %}
+	<li>{% include "article/article-content.twig" with obj only %}</li>
+{% endfor %}
+</ul>
+{% include 'pagination.twig' %}
+{% endset %}
+
+
+
+{% include 'base-page.twig' with {
+	page_class_content : page_content_class,
+	page_class_sidebar : page_class_sidebar,
+	page_widget_sidebar: page_widget_sidebar,
+	page_content : content
+	}
+%}
+{% endblock %}

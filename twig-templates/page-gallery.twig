@@ -17,6 +17,8 @@
 {% endmacro %}
 {% import _self as gmacro %}
 
+{% if function('is_plugin_active','enhanced-media-library/enhanced-media-library.php') %}{% include 'page-gallery-media-category.twig' ignore missing %}{% endif %}
+
 {# *** Random *** #}
 {% if options.random %}{%set images = images | randomize %}{% else %}{%set images = images %}{%endif%}
 {# *** Limit *** #}
@@ -78,7 +80,7 @@
 								<img  data-image="{{image.thumb|default(image.large|resize(300))}}"
                       alt="{{image.alt|default(image.title)|e('html_attr')}}"
                       title="{{image.title|e('html_attr')}}"    />
-              </a>						
+              </a>
 						</li>
 					{% endfor %}
 						</ul>

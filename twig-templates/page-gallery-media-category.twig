@@ -1,0 +1,45 @@
+{% set term = TimberTerm(options.category) %}
+{% set image_id_list = [] %}
+{% if term.children | length > 0 %}
+	{% for term_child in term.children %}
+    {% set filter_slug = (term_child.title|regex_replace('/[^a-z]/i', '_')|lower) %}
+    {% set filters = filters | merge({ (term_child.slug)  : term_child.title }) %}
+		{% for p in function('get_fg_media_category',term_child.ID) %}
+      {% set img = TimberImage(p.ID) %}
+      {% if img.ID in image_id_list %}
+      {% else %}
+        {% set image_id_list = image_id_list|merge([img.ID]) %}
+        {% set filter_terms = [] %}
+        {% for terms in img.get_terms %}
+          {% set filter_terms =  filter_terms | merge([ terms.slug]) %}
+        {% endfor %}
+
+        {% set images = images | merge([{
+          'id' : img.ID,
+          'thumb' : img.src|resize(300),
+          'medium' : img.src|resize(1024),
+          'large' : img.src,
+          'caption' : img.caption,
+          'title' : img.title,
+          'filters' : filter_terms ,
+          'group' : options.group
+
+        }]) %}
+      {% endif %}
+		{% endfor %}
+	{% endfor %}
+{% else %}
+	{% for p in function('get_fg_media_category',options.category) %}
+    {% set img = TimberImage(p.ID) %}
+    {% set images = images | merge([{
+      'id' : img.ID,
+      'thumb' : img.src|resize(300),
+      'medium' : img.src|resize(1024),
+      'large' : img.src,
+      'caption' : img.caption,
+      'title' : img.title,
+      'filters' : [  filter_slug  ],
+      'group' : options.group
+    }]) %}
+	{% endfor %}
+{% endif %}

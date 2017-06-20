@@ -12,7 +12,7 @@
 <div class="carousel-wrapper" style="background-color: rgba(255,255,255,0.9);">
 <div id="{{id|e('html_attr')}}"
 	 class="carousel slide {{outer_class|e('html_attr')}} {% if youtube_enable == 'yes' and youtube_id and youtube_id | length  > 5 %}youtube-carousel{% endif %}"
-	 {% if youtube_enable == 'yes' and youtube_id and youtube_id | length  > 5 %}{% else %}yodata-ride="carousel" {% endif %}
+	 {% if youtube_enable == 'yes' and youtube_id and youtube_id | length  > 5 %}{% else %}data-ride="carousel" {% endif %}
 	 data-interval="{{interval|default('8000')}}"
 	 data-pause="none"
 	 {% if background %}data-background-lg="{{background}}"{% endif %}
@@ -50,7 +50,7 @@
 		{% endif %}
 
 		{% for item in items %}
-		<div class="item{% if loop.index0==0  and youtube_enable != 'yes' %} active{% endif %}">
+		<div class="item{% if loop.index0==0  and youtube_enable != 'yes' %} active{% endif %}" fade-in fadein>
 			{% if item.youtube.id is defined %}
 				{% set youtubeProp = 'autoPlay:true,startAt:0,mute:true' %}
 				<div id="ytcarousel" data-property="{videoURL:'{{item.youtube.id}}',containment:'#{{item.youtube.containmentId}}',{{youtubeProp}}}" ></div>

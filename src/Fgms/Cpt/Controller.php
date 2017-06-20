@@ -17,7 +17,9 @@ class Controller
             'post_type'     =>'award',
             'domain'        =>'award',
             'menu_icon'     =>'dashicons-awards',
-            'supports'      => array('title','page-attributes')
+            'supports'      => array('title','page-attributes'),
+            'exclude_from_search'        => true,
+            'public'        => false
           ];
         }
         if ($this->is_enabled('testimonials-enable' )){
@@ -174,17 +176,25 @@ class Controller
          unset($defaults['wpseo-score']);
          unset($defaults['wpseo-score-readability']);
          $defaults['active'] = 'Home Page';
+         $defaults['modal_active'] = 'Modal Active';
+         $defaults['booking_start_date'] = 'Booking Start Date';
+         $defaults['booking_end_date'] = 'Booking End Date';
          $defaults['start_date'] = 'Start Date';
          $defaults['end_date'] = 'End Date';
+
          $defaults['code'] = 'Promo Code';
          $defaults['intro'] = 'Introduction';
          $defaults['image'] = 'Image';
          return $defaults;
        }, 20);
        add_action('manage_special_posts_custom_column', function($column_name,$post_ID){
+         if ($column_name == 'sort'){  echo intval(get_post_meta($post_ID, 'order', true)); }
          if ($column_name == 'active'){  echo ucfirst(get_post_meta($post_ID, 'fg-widget-enable', true)); }
+         if ($column_name == 'modal_active'){  echo ucfirst(get_post_meta($post_ID, 'fg-modal-enable', true)); }
          if ($column_name == 'start_date'){  echo get_post_meta($post_ID, 'fg-start-date', true); }
          if ($column_name == 'end_date'){  echo get_post_meta($post_ID, 'fg-end-date', true); }
+         if ($column_name == 'booking_start_date'){  echo get_post_meta($post_ID, 'fg-booking-start-date', true); }
+         if ($column_name == 'booking_end_date'){  echo get_post_meta($post_ID, 'fg-booking-end-date', true); }
          if ($column_name == 'code'){  echo get_post_meta($post_ID, 'fg-booking-code', true); }
          if ($column_name == 'intro'){  echo strip_tags(addslashes(get_post_meta($post_ID, 'intro-text', true))) ; }
          if ($column_name == 'image'){  echo wp_get_attachment_image(get_post_meta($post_ID, 'fg-widget-images', true)); }
@@ -212,13 +222,34 @@ class Controller
         }
         if ($column_name == 'shortcode'){  echo '[page_gallery id="'.$post_ID.'"]'; }
         if ($column_name == 'randomize'){  echo get_post_meta($post_ID, 'randomize', true); }
-        if ($column_name == 'type'){  echo ucfirst(get_post_meta($post_ID, 'gallery_type', true)); }
-        if ($column_name == 'yaml'){  echo ucfirst(get_post_meta($post_ID, 'database-or-yaml', true)); }
+        if ($column_name == 'type'){  echo ucfirst(get_post_meta($post_ID, 'gallery_type', true));        }
+        if ($column_name == 'yaml'){
+          echo ucfirst(get_post_meta($post_ID, 'database-or-yaml', true));
+          if (is_plugin_active('enhanced-media-library/enhanced-media-library.php') ){
+            $term_id = intval(get_post_meta($post_ID,'media-category',true));
+            if ($term_id > 0){
+              $term = get_term($term_id);
+              echo '<br/> Uses Category <strong>'. $term->name .'</strong>';
+            }
+
+          }
+        }
         if ($image !== false){
           if ($column_name == 'image'){  echo wp_get_attachment_image($image); }
         }
 
-        if ($column_name == 'count'){  echo ($image) ? count($group_data): 0; }
+        if ($column_name == 'count'){
+           $new_count = 0;
+           if (is_plugin_active('enhanced-media-library/enhanced-media-library.php') ){
+             $term_id = intval(get_post_meta($post_ID,'media-category',true));
+             if ($term_id > 0){
+               $term = get_term($term_id);
+               $new_count = $term->count;              
+             }
+
+           }
+            echo ($image) ? count($group_data): $new_count;
+         }
 
      }, 10, 2);
      // Media Clippings

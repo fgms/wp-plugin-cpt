@@ -45,7 +45,10 @@ function get_slideshow_fields($group='') {
             'type' => 'file',
             'field' => 'feature-image',
             'label' => 'Image',
-            'options' => array('button' => 'Add Image'),
+            'options' => [
+              'button' => 'Add Image',
+              'basic' => false
+            ],
             'preview_size' =>'thumbnail',
             'conditions' => [
                 [

@@ -18,10 +18,18 @@ call_user_func(function () {
 		$thumb_size = empty($atts['thumb_size']) ? 'medium' :  $atts['thumb_size']; // thumbnail, medium, large, full
 		$images = [];
 		$items = [];
+		$gfilters = [];
 		$gallery = [
 		  'filter' =>  ['enable' => $filter_enable,],
-		  'filters' => [],
-		  'options' => ['limit' => $limit,'random'=> $random,'thumbs_per_row' => get_post_meta($id,'thumbs-per-row', '5'),	'feature' => $feature_enable],
+		  'filters' => &$gfilters,
+		  'options' => [
+				'limit' => $limit,
+				'random'=> $random,
+				'thumbs_per_row' => get_post_meta($id,'thumbs-per-row', '5'),
+				'feature' => $feature_enable,
+				'category'=> get_post_meta($id, 'media-category',true),
+				'group' 	=> $group
+			],
 		  'images' => &$images
 		];
 		$retr = 'Not a valid ID';
@@ -89,14 +97,14 @@ call_user_func(function () {
 							if (strlen(trim($f)) > 0){
 								// this adds the filter to list
 		            $slug = slugify($f);
-		            $gallery['filters'][$slug] =$f;
+		            $gfilters[$slug] =$f;
 		            $filter[] = $slug;
 							}
 		        }
 					}
 					else {
 						$slug = slugify($item['fg-filters']);
-						$gallery['filters'][$slug] = $item['fg-filters'];
+						$gfilters[$slug] = $item['fg-filters'];
 						$filter[] = $slug;
 					}
 
@@ -111,8 +119,7 @@ call_user_func(function () {
 	          'title' => $title,
 	          'filters'=> $filter,
 	          'youtubeid' => $youtube,
-						'group' => $group,
-						'diag' => $item
+						'group' => $group
 	        ];
 				}
 

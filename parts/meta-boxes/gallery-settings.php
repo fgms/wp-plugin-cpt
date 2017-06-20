@@ -9,6 +9,13 @@ Priority: high
 require_once __DIR__.'/../../includes/gallery.php';
 $shortcode = '<pre>[page_gallery id="'. $post->ID .'"]</pre>';
 
+$choices_array2 = array(''=>'-- Select -- ');
+$term_choice = get_terms('media_category',['hide_empty' =>false]);
+
+foreach ($term_choice as $term){
+    $choices_array2[$term->term_id] =  $term->name;
+}
+
 piklist('field', array(
   'type' => 'html',
   'label' => 'Shortcode',
@@ -66,6 +73,22 @@ piklist('field',[
   ],
 
 ]);
+
+if (is_plugin_active('enhanced-media-library/enhanced-media-library.php') ){
+  piklist('field',[
+    'type' => 'select',
+    'label' => __('Media Category slug or id'),
+    'field' => 'media-category',
+    'choices' => $choices_array2
+  ]);
+}
+else {
+  piklist('field', array(
+    'type' => 'html',
+    'label' => 'HTML Field',
+    'value' => '<strong>To Allow Media Category enable plugin </strong> https://wordpress.org/plugins/enhanced-media-library/'
+  ));
+}
 piklist('field',[
   'type' => 'text',
   'field'=> 'yaml-location',
@@ -79,6 +102,8 @@ piklist('field',[
   ]
 
 ]);
+
+
 /*
 piklist('field',[
     'type' => 'group',

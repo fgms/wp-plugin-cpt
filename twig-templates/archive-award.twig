@@ -1,7 +1,7 @@
 {% extends 'base.twig' %}
 {% block content %}
 {% set page_content_class = config.settings.article.grid.left.class %}
-{% if function('is_post_type_archive','special') %}
+{% if function('is_post_type_archive','award') %}
 	{% set page_content_class = 'col-sm-12 ' %}
 	{% set article_object = {
 		class : "article-page-default"

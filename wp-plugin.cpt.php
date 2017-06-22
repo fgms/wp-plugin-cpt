@@ -95,6 +95,8 @@ add_filter('piklist_admin_pages', function($pages){
 	 ,'menu_slug' => 'realestate_settings'
 	 ,'setting' => 'realestate_settings'
 	 ,'single_line' => true
+   ,'default_tab' => 'General'
+
 	 ,'save_text' => 'Save Settings'
 	];
   $pages[] = [

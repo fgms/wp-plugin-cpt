@@ -2,7 +2,7 @@
 /*
 Title: Defaults
 Setting: realestate_settings
-Order: 10
+Tab: General
 */
 
 piklist('field',[
@@ -12,7 +12,13 @@ piklist('field',[
   'label' => __('Price Units'),
   'description' => ''
 ]);
-
+piklist('field',[
+  'type' => 'text',
+  'field'=> 'realestate_area_units',
+  'value' => 'Sq.ft.',
+  'label' => __('Area Units'),
+  'description' => ''
+]);
 $piklist_editor_options = array( // Pass any option that is accepted by wp_editor()
       'wpautop' => false,
       'media_buttons' => true,

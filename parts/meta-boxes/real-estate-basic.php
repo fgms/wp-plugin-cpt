@@ -13,6 +13,7 @@ piklist('field',[
   'label' => __('Type'),
   'field' => 'condo-style',
   'choices' => [
+    '' => '',
     'Condominium'  => 'Condominium',
     'Townhouse'   => 'Townhouse',
   ],
@@ -67,6 +68,20 @@ piklist('field',[
     'Garden View'  => 'Garden View',
 
   ],
+  'columns' => 4
+]);
+
+piklist('field',[
+  'type' => 'text',
+  'label' => __('Building / Location'),
+  'field' => 'condo-location',
+  'columns' => 4
+]);
+
+piklist('field',[
+  'type' => 'text',
+  'label' => __('Floor Area'),
+  'field' => 'condo-area',
   'columns' => 4
 ]);
 

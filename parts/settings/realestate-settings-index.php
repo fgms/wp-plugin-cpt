@@ -1,6 +1,6 @@
 <?php
 /*
-Title: Index Configuration
+Title: Table Columns
 Setting: realestate_settings
 Tab: Index
 */
@@ -13,7 +13,7 @@ piklist('field',[
     'fields' => [
       [
           'type' => 'select',
-          'label' => __('Row'),
+          'label' => __('Column Type'),
           'field' => 'column_type',
           'choices' => [
             'condo-status' => 'Status',

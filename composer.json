@@ -1,6 +1,6 @@
 {
     "name" : "sturple/wp-plugin-cpt",
-    "version" : "0.0.1",
+    "version" : "0.1.0",
     "description" : "Wordpress plugin to add custom post types ie awards, testimonials, specials and slideshow custom post types ",
     "keywords" : ["wordpress", "plugin","FGMS"],
     "homepage" : "https://github.com/sturple/wp-plugin-cpt",

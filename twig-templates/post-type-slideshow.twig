@@ -36,11 +36,16 @@
     {% set post_id = macro_slideshow.validate(slideshow) | trim %}
 {% endif %}
 
-
 {# ******* Here is where the logic starts either feature image or slideshow #}
-
 {% if slideshow['slide-or-image-radio'] | first == 'slideshow' %}
     {% set slideshow_post = function('Timber::get_post',post_id) %}
+
+    {# ******* Check if there is an overlay #}
+    {% set overlay = false %}
+    {% if slideshow_post.get_field('overlay_enable') and slideshow_post.get_field('overlay_enable') == 'yes' %}
+      {% set overlay = slideshow_post.get_field('overlay_html') | raw %}
+    {% endif %}
+
     {% set slide_id %}{% if function('is_front_page') %}homepage-slideshow{% else %}secondary-slideshow{% endif %}{% endset %}
     {% set slides = slideshow_post.get_field('slides')%}
     {% set slideitems = [] %}
@@ -77,13 +82,18 @@
         'youtube_id' : slideshow_post.get_field('youtube_id'),
         'youtube_properties' : slideshow_post.get_field('youtube_properties'),
         'youtube_filters' : slideshow_post.get_field('youtube_filters'),
-        'youtube_background' : youtube_background.src|resize(600)
+        'youtube_background' : youtube_background.src|resize(600),
+        'overlay' : overlay
 
     }
     %}
 
     {% if featureCarousel is iterable and featureCarousel.items is iterable %}
         {% include 'bootstrap-carousel.twig' with featureCarousel only %}
+        {% if slideshow_post.get_field('overlay_css') %}
+          <style>{{slideshow_post.get_field('overlay_css') | raw}}</style>
+        {% endif %}
+        
     {% endif %}
 
 {% else %}

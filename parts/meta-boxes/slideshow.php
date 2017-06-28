@@ -77,11 +77,64 @@ piklist('field',[
 piklist('field',[
     'type' => 'file',
     'field' => 'youtube_background',
-    'label' => 'Image',
+    'label' => 'Youtube Background Image',
     'options' => array('button' => 'Add Image'),
     'preview_size' =>'thumbnail',
     'columns' => 3,
+    'conditions' => [
+        [
+          'field' =>  'youtube_enable',
+          'value' => 'yes'
+        ]
+      ]
 
+]);
+
+piklist('field', array(
+  'type' => 'select',
+  'field'=> 'overlay_enable',
+  'label' => __('HTML Overlay'),
+  'description' => __('This enables youtube video on first slide'),
+  'choices' => [
+    'yes' => 'yes',
+    'no'  => 'no'
+  ],
+  'value' => 'yes',
+));
+
+piklist('field',[
+    'type' => 'textarea',
+    'label' => __('Overlay HTML'),
+    'description' => '',
+    'field' => 'overlay_html',
+    'columns' => 12,
+    'attributes' => [
+      'rows' => 5
+    ],
+    'value' => "<div class=\"carousel-overlay-inner\">\r\n<a href=\"\" class=\" btn btn-primary\">Book Now</a>\r\n<div>Or Call at: 000.000.000</div>\r\n</div>",
+    'conditions' => [
+        [
+          'field' =>  'overlay_enable',
+          'value' => 'yes'
+        ]
+    ],
+]);
+piklist('field',[
+    'type' => 'textarea',
+    'label' => __('Overlay CSS'),
+    'description' => '',
+    'field' => 'overlay_css',
+    'columns' => 12,
+    'attributes' => [
+      'rows' => 8
+    ],
+    'value' => ".carousel .carousel-overlay {top: 30px; right:30px; visibility: hidden;}\r\n\r\n@media screen and (min-width: 998px) {\r\n.carousel .carousel-overlay {visibility:visible;}\r\n}",
+    'conditions' => [
+        [
+          'field' =>  'overlay_enable',
+          'value' => 'yes'
+        ]
+    ],
 ]);
 /*
 piklist('field',[

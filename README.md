@@ -9,7 +9,7 @@ This is a wordpress custom post type plugin for the following post types.
 * Awards
 * Testimonials
 * Specials
-* Slideshow
+* Slideshows
 * Galleries
 * Announcements
 * Media Clippings
@@ -37,9 +37,28 @@ Title for index.
 Pre text for index.
 Post text for index.
 Call to action for display page.
-Index table configuration.
+Table Columns ( select columns, label and order).
+
+##  Post Types
+
+### Awards
 
 
+### Testimonials
+
+### Specials
+
+### Slideshows
+
+### Galleries
+
+### Announcements
+
+### Media Clippings
+
+### Newsletters
+
+### Real Estate
 
 
 

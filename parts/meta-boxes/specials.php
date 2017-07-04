@@ -7,6 +7,26 @@ Collapse: false
 Priority: high
 */
 
+$theme_options = get_option('special_settings');
+
+$type_choices = [];
+$property_choices = [];
+if ( !(empty($theme_options['special_type']))){
+  foreach($theme_options['special_type'] as $type){
+    if (!empty($type['special_slug']) && (!empty($type['special_name']))){
+      $type_choices[$type['special_slug']] = $type['special_name'];
+    }
+  }
+}
+
+if ( !(empty($theme_options['special_properties']))){
+  foreach($theme_options['special_properties'] as $properties){
+    if (!empty($properties['property_name'])){
+      $property_choices[$properties['property_name']] = $properties['property_name'];
+    }
+  }
+}
+
 $piklist_editor_options = array( // Pass any option that is accepted by wp_editor()
       'wpautop' => false,
       'media_buttons' => true,
@@ -20,6 +40,24 @@ $piklist_editor_options = array( // Pass any option that is accepted by wp_edito
         'wp_autoresize_on' => true
       )
     );
+if (count($property_choices) >0 ){
+  piklist('field',[
+    'type' => 'select',
+    'label' => __('Properties'),
+    'field' => 'fg_special_properties',
+    'choices' => $property_choices
+  ]);
+}
+
+
+if (count($type_choices) >0 ){
+  piklist('field',[
+    'type' => 'checkbox',
+    'label' => __('Category'),
+    'field' => 'fg_special_type',
+    'choices' => $type_choices
+  ]);
+}
 piklist('field',[
   'type' => 'text',
   'label' => __('Subtitle'),

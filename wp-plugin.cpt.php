@@ -67,6 +67,16 @@ add_filter('fg_theme_master_twig_locations', function($timberLocationsArray){
 });
 
 add_filter('piklist_admin_pages', function($pages){
+  $pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=special'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'special_settings'
+	 ,'setting' => 'special_settings'
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
 	$pages[] = [
 	 'page_title' => __('Settings')
 	 ,'menu_title' => __('Settings', 'piklist')
@@ -96,7 +106,6 @@ add_filter('piklist_admin_pages', function($pages){
 	 ,'setting' => 'realestate_settings'
 	 ,'single_line' => true
    ,'default_tab' => 'General'
-
 	 ,'save_text' => 'Save Settings'
 	];
   $pages[] = [

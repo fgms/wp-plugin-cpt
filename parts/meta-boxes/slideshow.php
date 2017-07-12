@@ -94,7 +94,7 @@ piklist('field', array(
   'type' => 'select',
   'field'=> 'overlay_enable',
   'label' => __('HTML Overlay'),
-  'description' => __('This enables youtube video on first slide'),
+  'description' => __('This enables overlay'),
   'choices' => [
     'yes' => 'yes',
     'no'  => 'no'

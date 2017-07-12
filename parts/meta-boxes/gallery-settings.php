@@ -9,12 +9,7 @@ Priority: high
 require_once __DIR__.'/../../includes/gallery.php';
 $shortcode = '<pre>[page_gallery id="'. $post->ID .'"]</pre>';
 
-$choices_array2 = array(''=>'-- Select -- ');
-$term_choice = get_terms('media_category',['hide_empty' =>false]);
 
-foreach ($term_choice as $term){
-    $choices_array2[$term->term_id] =  $term->name;
-}
 
 piklist('field', array(
   'type' => 'html',
@@ -75,6 +70,12 @@ piklist('field',[
 ]);
 
 if (is_plugin_active('enhanced-media-library/enhanced-media-library.php') ){
+  $choices_array2 = array(''=>'-- Select -- ');
+  $term_choice = get_terms('media_category',['hide_empty' =>false]);
+
+  foreach ($term_choice as $term){
+      $choices_array2[$term->term_id] =  $term->name;
+  }
   piklist('field',[
     'type' => 'select',
     'label' => __('Media Category slug or id'),

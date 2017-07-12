@@ -30,3 +30,54 @@ piklist('field',[
     'add_more' => false,
     'fields' => get_slideshow_fields('defaults')
 ]);
+
+piklist('field', array(
+  'type' => 'html',
+  'label' => '',
+  'value' => '<strong>Enable overlay on Feature Images</strong>' ));
+
+piklist('field', array(
+  'type' => 'select',
+  'field'=> 'overlay_enable',
+  'label' => __('HTML Overlay'),
+  'description' => __('This enables overlay'),
+  'choices' => [
+    'yes' => 'yes',
+    'no'  => 'no'
+  ],
+  'value' => 'yes',
+));
+piklist('field',[
+    'type' => 'textarea',
+    'label' => __('Overlay HTML'),
+    'description' => '',
+    'field' => 'overlay_html',
+    'columns' => 12,
+    'attributes' => [
+      'rows' => 5
+    ],
+    'value' => "<div class=\"feature-image-overlay-inner\">\r\n<a href=\"\" class=\" btn btn-primary\">Book Now</a>\r\n<div>Or Call at: 000.000.000</div>\r\n</div>",
+    'conditions' => [
+        [
+          'field' =>  'overlay_enable',
+          'value' => 'yes'
+        ]
+    ],
+]);
+piklist('field',[
+    'type' => 'textarea',
+    'label' => __('Overlay CSS'),
+    'description' => '',
+    'field' => 'overlay_css',
+    'columns' => 12,
+    'attributes' => [
+      'rows' => 8
+    ],
+    'value' => ".single-feature-image .feature-image-overlay {top: 30px; right:30px; visibility: hidden;}\r\n\r\n@media screen and (min-width: 998px) {\r\n.single-feature-image .feature-image-overlay {visibility:visible;}\r\n}",
+    'conditions' => [
+        [
+          'field' =>  'overlay_enable',
+          'value' => 'yes'
+        ]
+    ],
+]);

@@ -74,7 +74,9 @@ if (is_plugin_active('enhanced-media-library/enhanced-media-library.php') ){
   $term_choice = get_terms('media_category',['hide_empty' =>false]);
 
   foreach ($term_choice as $term){
-      $choices_array2[$term->term_id] =  $term->name;
+     if ( (!empty($term->term_id)) AND (!empty($term->name)) ){
+       $choices_array2[$term->term_id] =  $term->name;
+     }
   }
   piklist('field',[
     'type' => 'select',

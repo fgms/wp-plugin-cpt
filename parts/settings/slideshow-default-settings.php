@@ -39,7 +39,7 @@ piklist('field', array(
 piklist('field', array(
   'type' => 'select',
   'field'=> 'overlay_enable',
-  'label' => __('HTML Overlay'),
+  'label' => __('Feature Image HTML Overlay'),
   'description' => __('This enables overlay'),
   'choices' => [
     'yes' => 'yes',
@@ -49,7 +49,7 @@ piklist('field', array(
 ));
 piklist('field',[
     'type' => 'textarea',
-    'label' => __('Overlay HTML'),
+    'label' => __('Feature Image Overlay HTML'),
     'description' => '',
     'field' => 'overlay_html',
     'columns' => 12,
@@ -66,7 +66,7 @@ piklist('field',[
 ]);
 piklist('field',[
     'type' => 'textarea',
-    'label' => __('Overlay CSS'),
+    'label' => __('Feature Image Overlay CSS'),
     'description' => '',
     'field' => 'overlay_css',
     'columns' => 12,

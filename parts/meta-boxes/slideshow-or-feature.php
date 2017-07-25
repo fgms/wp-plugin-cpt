@@ -1,7 +1,7 @@
 <?php
 /*
 Title: Images(s)
-Post Type: page,  special, post
+Post Type: page, special, post, lp
 Order: 5
 Collapse: false
 Priority: high
@@ -17,9 +17,10 @@ piklist('field',[
     'fields' => get_slideshow_fields('slideshow')
 ]);
 
+$label = get_post_type() == 'lp' ? __('Gallery') : __('Sidebar Gallery');
 piklist('field',[
     'type' => 'select',
-    'label' => __('Sidebar Gallery'),
+    'label' => $label,
     'field' => 'sidebar-gallery',
     'choices' => get_slideshow_choices('gallery')
 

@@ -96,3 +96,13 @@ piklist('field',[
     ],
     'value' => 'disable'
 ]);
+piklist('field',[
+    'type' => 'checkbox',
+    'field' => 'landingpage-enable',
+    'label' => __('Landing Pages:'),
+    'description' => _(''),
+    'choices' => [
+      'enable' => 'Enable'
+    ],
+    'value' => 'disable'
+]);

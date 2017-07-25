@@ -28,6 +28,16 @@ piklist('field',[
       ]
     ]
 ]);
+piklist('field', [
+  'type' => 'file',
+  'label' => __('VIP Banner'),
+  'field' => 'vip_banner',
+  'description' => 'Banner that gets added to index to indicate VIP',
+  'options' => array(
+    'modal_title' => 'Add Bannery'
+    ,'button' => 'Add'
+  )
+]);
 piklist('field',[
     'type' => 'group',
     'field' => 'special_properties',

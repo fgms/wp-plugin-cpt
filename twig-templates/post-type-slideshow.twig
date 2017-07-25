@@ -100,7 +100,7 @@
     {% set feature_img = TimberImage(post_id) %}
     <div class="single-feature-image"  data-background="{{feature_img.src}}">
       {% set overlay = false %}
-      {% if slideshow_options.overlay_enable and slideshow_options.overlay_enable == 'yes' %}
+      {% if slideshow_options.overlay_enable and slideshow_options.overlay_enable == 'yes' and (function('get_post_type') == 'post' or function('get_post_type')== 'page') %}
         {% set overlay = slideshow_options.overlay_html | raw %}
       {% endif %}
       {% if overlay %}<div class="feature-image-overlay">{{overlay}}</div>{% endif %}

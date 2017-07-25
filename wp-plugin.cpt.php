@@ -77,6 +77,16 @@ add_filter('piklist_admin_pages', function($pages){
 	 ,'single_line' => true
 	 ,'save_text' => 'Save Settings'
 	];
+  $pages[] = [
+	 'page_title' => __('Settings')
+	 ,'menu_title' => __('Settings', 'piklist')
+	 ,'sub_menu' => 'edit.php?post_type=lp'
+	 ,'capability' => 'manage_options'
+	 ,'menu_slug' => 'landingpage_settings'
+	 ,'setting' => 'landingpage_settings'
+	 ,'single_line' => true
+	 ,'save_text' => 'Save Settings'
+	];
 	$pages[] = [
 	 'page_title' => __('Settings')
 	 ,'menu_title' => __('Settings', 'piklist')

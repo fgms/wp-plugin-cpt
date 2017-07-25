@@ -115,6 +115,18 @@ class Controller
             'public'        => true
           ];
         }
+        if ($this->is_enabled('landingpage-enable' )){
+          $post_type_array[] = [
+            'name'          =>'Landing Pages',
+            'singular_name' =>'Landing Page',
+            'post_type'     =>'lp',
+            'domain'        =>'fgms-lp',
+            'menu_icon'     =>'dashicons-admin-page',
+            'supports'      => array('title','page-attributes'),
+            'exclude_from_search'        => true,
+            'public'        => true
+          ];
+        }
 
         $this->posttypes = $post_type_array;
         $this->wp=$wp;

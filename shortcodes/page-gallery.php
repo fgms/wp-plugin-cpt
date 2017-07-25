@@ -59,7 +59,7 @@ call_user_func(function () {
 				$caption="";
 				//means is file.
 				if ( (!empty($item['id'])) or (!empty($item['thumb_id'])) ) {
-					$thumb = (! empty($item['thumb_id'])) ? wp_get_attachment_image_src($item['thumb_id'])[0]: null;
+					$thumb = (! empty($item['thumb_id'])) ? wp_get_attachment_image_src($item['thumb_id'],'full')[0]: null;
 					$medium= wp_get_attachment_image_src($item['id'],$thumb_size)[0];
 					$large= wp_get_attachment_image_src($item['id'],'large')[0];
 					$full= wp_get_attachment_image_src($item['id'],'full')[0];

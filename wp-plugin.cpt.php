@@ -3,7 +3,7 @@
  * Plugin Name: Custom Posttypes
  * Plugin URI: https://github.com/sturple/wp-plugin-cpt/
  * Description: Wordpress plugin to add custom post types for hotels ie Awards, Testimonials, Specials, Galleries and Slideshows
- * Version: 0.1.2
+ * Version: 0.1.3
  * Author: Shawn Turple
  * Author URI: http://turple.ca
  * License: GPL-3.0

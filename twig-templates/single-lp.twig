@@ -1,0 +1,141 @@
+{% extends 'base-lp.twig' %}
+
+{% block content %}
+
+{% set options = function('get_option', 'landingpage_settings') %}
+{% set img_id = (post.get_field('background_image') is iterable) ? post.get_field('background_image') | first  : post.get_field('background_image') %}
+{% set img  = TimberImage(img_id+0) %}
+<div {% if img.src %}data-background="{{img.src}}" style="background-attachment: fixed;"{% endif %}>
+  <div class="main-content">
+    <div class="container">
+      <nav class="navbar">
+        <div class="row">
+          <div class="col-sm-8">
+            {% if options.logo_header and options.logo_header | first + 0 > 0 %}
+              {% set img_id = options.logo_header | first + 0 %}
+              {% set img  = TimberImage(img_id) %}
+              {% if img.src %}
+              <a href="{{site.url|e('html_attr')}}" class="navbar-brand">
+                  <img data-image="{{img.src}}" alt="{{site.title}}">
+                  <noscript><img src="{{img.src}}" alt="{{site.title}}"></noscript>
+              </a>
+              {% endif %}
+            {% endif %}
+          </div>
+          <div class="col-sm-4">
+            <a href="{{site.url}}" class="btn btn-primary">{{options.header_button_text | default('Home')}}</a>
+          </div>
+        </div>
+      </nav>
+      {% include 'post-type-slideshow.twig' %}
+        <div class="inner-container">
+            <div class="row">
+              <div class="{{options.content_class | default('col-sm-12')}}">
+                <div class="main-column-wrapper">
+                  <h1>{{post.title}}</h1>
+                  {% if post.get_field('subtitle') | length > 0%}<h2 class="subtitle">{{post.get_field('subtitle')}}</h2>{% endif %}
+                  {% if post.get_field('sidebar-gallery') and post.get_field('sidebar-gallery')+0 > 0 %}
+                    {% filter shortcodes %}
+                      [tabs]
+                      [tab title ="Overview"]
+                      <h2>Overview</h2>
+                      <div class="landing-page-description" >
+                          {{post.get_field('description')}}
+                      </div>
+
+                      {% if post.get_field('boilerplate') %}
+                      <div class="landing-page-boilerplate">
+                        {{post.get_field('boilerplate')}}
+                      </div>
+                      {% endif %}
+
+                      [/tab]
+                      [tab title="Gallery"]
+                      <h2>Gallery</h2>
+                  	   {# gallery #}
+                    		<div class="page-sidebar-with-sidebar-gallery">
+                    			[page_gallery id="{{post.get_field('sidebar-gallery')}}" filters="false" feature="false" ]
+                    		</div>
+                      [/tab]
+                      [/tabs]
+
+                      {% if post.get_field('calltoaction') | length > 0 %}
+                      <div class="call-to-action">
+                          [twig]{{post.get_field('calltoaction')}}[/twig]
+                      </div>
+                      {% endif %}
+                    {% endfilter %}
+
+                  {% else %}
+                    <div class="landing-page-description" >
+                        {{post.get_field('description')}}
+                    </div>
+                    {% if post.get_field('boilerplate') %}
+                    <div class="landing-page-boilerplate">
+                      {{post.get_field('boilerplate')}}
+                    </div>
+                    {% endif %}
+                    {% if post.get_field('calltoaction') | length > 0 %}
+                    <div class="call-to-action">
+                        [twig]{{post.get_field('calltoaction')}}[/twig]
+                    </div>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+                {% if options.content_class and options.content_class |length > 1 %}
+                <div class="{{options.sidebar_class}}">
+                    <div id="sidebar">
+                        <ul class="widget-section">
+                            <div class="padded-box">
+                                <h2>{{post.get_field('calltoaction_title')| default('Contact Us')}}</h2>
+                                {% if post.get_field('booking_url') %}
+                                <div style="text-align: center">
+                                  <a href="{{post.get_field('booking_url')}}" style="margin:0;" class="btn btn-primary">{{post.get_field('calltoaction_label')| default('Book Online')}}</a>
+                                </div>
+                                {% endif %}
+                                {% if post.get_field('phone') %}
+                                <div class="or-call-us">
+                                    Or call:
+                                    <div>{{post.get_field('phone')}}</div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </ul>
+                        {% if post.get_field('termsandconditions') %}
+                        <div class="widget-section landingpage-termsandconditions">
+                          {{post.get_field('termsandconditions')}}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+        </div>
+        <footer class="footer" >
+          {% filter shortcodes %}
+          {% if post.get_field('phone') or post.get_field('booking_url') %}
+            <div class="footer-book-info">
+              {% if post.get_field('booking_url') %}
+              <span><a href="{{post.get_field('booking_url')}}">{{post.get_field('calltoaction_label')| default('Book Online')}}</a>.</span>
+              {% endif %}
+              {% if post.get_field('phone') %}
+              <span style="">Or Call <span ><a href="tel:{{post.get_field('phone')}}">{{post.get_field('phone')}}</a></span></span>
+              {% endif %}
+            </div>
+          {% endif %}
+          <div class="footer-contact-info">
+            <a href="{{site.url}}">{{site.name}}</a>
+            {% if config.company.address.street %} | {{config.company.address.street}}{% endif %}
+            {% if config.company.address.city %} {{config.company.address.city}}{% endif %}
+            {% if config.company.address.country %} {{config.company.address.country}}{% endif %}
+            {% if config.company.address.postal %} {{config.company.address.postal}}{% endif %}
+            {% if config.email.info %} | [email]{{config.email.info}}[/email]{% endif %}
+          </div>
+          {% endfilter %}
+        </footer>
+    </div>
+  </div>
+</div>
+{% endblock %}

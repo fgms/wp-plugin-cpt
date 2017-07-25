@@ -1,0 +1,29 @@
+{# base.twig #}
+<!DOCTYPE html>
+<html {{site.language_attributes()}}>
+    <head>
+		<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<link rel="shortcut icon" type="image/x-icon" href="{{theme.link}}/assets/images/favicon.ico">
+        {{wp_head}}
+        {% block head %}
+            <!-- This is where you'll put template-specific stuff that needs to go in the head tags like custom meta tags, etc. -->
+        {% endblock %}
+		{% block styles %}
+			{% if config.css is defined %}{% include 'style.twig' ignore missing with config  %}{% endif %}
+		{% endblock %}
+    </head>
+    <body class="{{body_class}} landing-page" data-class="{{function('get_body_class')|join(' ')}}">
+	{% block content %}<!-- The template's main content will go here. -->{% endblock %}
+	{% block scripts %}
+		<script type="text/javascript">
+			{# debug scripts #}
+			{% if config.ERRORS is defined %}
+				{% for error in config.ERRORS %}
+				console.error('SETTINGS.yml ERROR', '{{error|e('js')}}');
+				{% endfor %}
+			{% endif %}
+		</script>
+	{% endblock %}
+	{{wp_footer}}
+    </body>
+</html>

@@ -48,7 +48,7 @@ piklist('field',[
     'Studio' => 'Studio',
     'Studio w/ Loft' => 'Studio w/ Loft',
     '1 Bedroom' => '1 Bedroom',
-    'One Bedroom w/ Loft' => 'One Bedroom w/ Loft',
+    '1 Bedroom w/ Loft' => '1 Bedroom w/ Loft',
     '2 Bedroom' => '2 Bedrooms',
     'Two Bedroom w/ Loft' => 'Two Bedroom w/ Loft',
     'Penthouse' => 'Penthouse'

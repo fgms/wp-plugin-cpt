@@ -57,6 +57,7 @@ piklist('field',[
   'label' => __('Header Button Text'),
   'description' => ''
 ]);
+/*
 piklist('field',[
   'type' => 'text',
   'field'=> 'calltoaction_title',
@@ -72,7 +73,7 @@ piklist('field',[
   'label' => __('Call to Action Link Label'),
   'description' => ''
 ]);
-
+*/
 piklist('field',[
   'type' => 'editor',
   'field' => 'boilerplate',
@@ -101,4 +102,31 @@ piklist('field', [
     'label' => 'Background Image',
     'options' => array('button' => 'Add Image'),
     'columns' => 4
+]);
+
+piklist('field',[
+  'type' => 'group',
+  'field' => 'cta_sidebar',
+  'description' => __('You can create multiple Call To Action Sidebars, All IDs need to be unique'),
+  'add_more' => true,
+  'fields' => [
+    [
+      'type' => 'text',
+      'field'=> 'cta_id',
+      'value' => 'cta-sidebar',
+      'label' => __('Unique ID'),
+      'columns' => 4
+    ],
+    [
+      'type' => 'textarea',
+      'field' => 'cta_content',
+      'columns' => 8,
+      'label' => __('CTA Content'),
+      'value' => "<div class=\"padded-box\">\n\t<h2>Contact Us</h2>\n\t<div style=\"text-align: center\"><a href=\"\" style=\"margin:0\" class=\"btn btn-primary\">Book Online</a></div>\n\t<div class=\"or-call-us\">Or call:<div>000.000.0000</div></div>\n</div>",
+      'description'=> __(''),
+      'attributes' => [
+        'rows' => 8
+      ],
+    ]
+  ]
 ]);

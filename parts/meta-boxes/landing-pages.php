@@ -39,6 +39,14 @@ piklist('field',   [
     'columns' => 12
 ]);
 
+piklist('field',[
+  'type' => 'editor',
+  'field' => 'boilerplate',
+  'label' => __('Boilerplate'),
+  'description'=> __(''),
+  'value' => (empty($options['boilerplate'])) ? '': $options['boilerplate'],
+  'options' => $piklist_editor_options
+]);
 
 piklist('field',   [
     'type' => 'editor',
@@ -50,6 +58,7 @@ piklist('field',   [
     'columns' => 12
 ]);
 
+
 $options = get_option('landingpage_settings');
 piklist('field',[
   'type' => 'text',
@@ -59,30 +68,33 @@ piklist('field',[
   'description' => ''
 ]);
 
-piklist('field',[
-  'type' => 'text',
-  'field'=> 'calltoaction_title',
-  'value' => (empty($options['calltoaction_title'])) ? '': $options['calltoaction_title'],
-  'label' => __('Call to Action Title'),
-  'description' => ''
+piklist('field',  [
+    'type' => 'text',
+    'label' => __('Booking URL'),
+    'field' => 'booking_url',
+    'columns' => 8,
+    'value'  => (empty($options['booking_url'])) ? '': $options['booking_url']
 ]);
 
-piklist('field',[
-  'type' => 'text',
-  'field'=> 'calltoaction_label',
-  'value' => (empty($options['calltoaction_label'])) ? '': $options['calltoaction_label'],
-  'label' => __('Call to Action Link Label'),
-  'description' => ''
-]);
+if (! empty($options['cta_sidebar'])){
+  $choices = [''=>'-- Select --'];
+  foreach ($options['cta_sidebar'] as $choice){
+    if (!empty($choice['cta_id'])){
+      $choices[$choice['cta_id']] = $choice['cta_id'];
+    }
+  }
+  piklist('field',[
+    'type' => 'select',
+    'field'=> 'cta_sidebar',
+    'label' => __('CTA Sidebar'),
+    'required' => true,
+    'description' => '',
+    'choices' => $choices
+  ]);
+}
 
-piklist('field',[
-  'type' => 'editor',
-  'field' => 'boilerplate',
-  'label' => __('Boilerplate'),
-  'description'=> __(''),
-  'value' => (empty($options['boilerplate'])) ? '': $options['boilerplate'],
-  'options' => $piklist_editor_options
-]);
+
+
 piklist('field',[
   'type' => 'editor',
   'field' => 'termsandconditions',
@@ -93,13 +105,7 @@ piklist('field',[
 ]);
 
 
-piklist('field',  [
-    'type' => 'text',
-    'label' => __('Booking URL'),
-    'field' => 'booking_url',
-    'columns' => 8,
-    'value'  => (empty($options['booking_url'])) ? '': $options['booking_url']
-]);
+
 piklist('field', [
     'type' => 'file',
     'field' => 'background_image',

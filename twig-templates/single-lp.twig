@@ -86,22 +86,29 @@
                 {% if options.content_class and options.content_class |length > 1 %}
                 <div class="{{options.sidebar_class}}">
                     <div id="sidebar">
-                        <ul class="widget-section">
-                            <div class="padded-box">
-                                <h2>{{post.get_field('calltoaction_title')| default('Contact Us')}}</h2>
-                                {% if post.get_field('booking_url') %}
-                                <div style="text-align: center">
-                                  <a href="{{post.get_field('booking_url')}}" style="margin:0;" class="btn btn-primary">{{post.get_field('calltoaction_label')| default('Book Online')}}</a>
-                                </div>
-                                {% endif %}
-                                {% if post.get_field('phone') %}
-                                <div class="or-call-us">
-                                    Or call:
-                                    <div>{{post.get_field('phone')}}</div>
-                                </div>
-                                {% endif %}
+                      {% if post.get_field('cta_sidebar') %}
+                        {% for cta in options.cta_sidebar %}
+                          {% if cta.cta_id == post.get_field('cta_sidebar') %}{{cta.cta_content}}{% endif %}
+                        {% endfor %}
+                      {% endif %}
+                      
+                        {#
+                        <div class="padded-box">
+                            <h2>{{post.get_field('calltoaction_title')| default('Contact Us')}}</h2>
+                            {% if post.get_field('booking_url') %}
+                            <div style="text-align: center">
+                              <a href="{{post.get_field('booking_url')}}" style="margin:0;" class="btn btn-primary">{{post.get_field('calltoaction_label')| default('Book Online')}}</a>
                             </div>
-                        </ul>
+                            {% endif %}
+                            {% if post.get_field('phone') %}
+                            <div class="or-call-us">
+                                Or call:
+                                <div>{{post.get_field('phone')}}</div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        #}
+
                         {% if post.get_field('termsandconditions') %}
                         <div class="widget-section landingpage-termsandconditions">
                           {{post.get_field('termsandconditions')}}

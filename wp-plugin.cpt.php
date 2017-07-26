@@ -20,6 +20,8 @@ if ( file_exists( $composer_autoload = __DIR__ . '/vendor/autoload.php' ) /* che
     require_once $composer_autoload;
     require_once(__DIR__.'/shortcodes/gallery.php');
     require_once(__DIR__.'/shortcodes/page-gallery.php');
+    require_once(__DIR__.'/shortcodes/slick/slick-carousel.php');
+    require_once(__DIR__.'/shortcodes/slick/slick-slide.php');    
 }
 call_user_func(function () {
     $controller=new \Fgms\Cpt\Controller(new \Fgms\WordPress\WordPressImpl());

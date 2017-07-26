@@ -15,16 +15,30 @@
         }
     ],
     "repositories": [
-        {
-            "type" : "composer",
-            "url" : "https://wpackagist.org"
+    {
+        "type" : "composer",
+        "url" : "https://wpackagist.org"
+    },
+    {
+      "type" : "package",
+      "package" : {
+        "name" : "kenwheeler/slick",
+        "version" : "1.7.0",
+        "source" : {
+          "url" : "https://github.com/kenwheeler/slick",
+          "type" : "git",
+          "reference" : "bee9b59"
         }
+      }
+    }
+
     ],
     "require": {
         "php" : ">=5.4",
         "composer/installers": "~1.0",
         "sturple/wordpress-utilities": "~1.0",
-        "wpackagist-plugin/piklist" : ">0.9"
+        "wpackagist-plugin/piklist" : ">0.9",
+        "kenwheeler/slick" : "~1.7"
     },
     "autoload": {
         "psr-4" : {"Fgms\\" : "src/Fgms/"}

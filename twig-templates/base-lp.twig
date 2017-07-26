@@ -11,6 +11,7 @@
 		{% block styles %}
 			{% if config.css is defined %}{% include 'style.twig' ignore missing with config  %}{% endif %}
 		{% endblock %}
+    {% include 'base-header.twig' ignore missing %}
     </head>
     <body class="{{body_class}} landing-page" data-class="{{function('get_body_class')|join(' ')}}">
 	{% block content %}<!-- The template's main content will go here. -->{% endblock %}

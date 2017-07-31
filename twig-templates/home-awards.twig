@@ -3,26 +3,27 @@
   <div class="container">
     <div class="inner-container">
       {% filter shortcodes %}
-      [slick_carousel]
+      [slick_carousel id="home-awards-carousel" slidesPerRow="3" appendsArrows="#home-awards-carousel" arrows="true"]
       {% for award in awards | reverse %}
           [slick_slide]
           {% set img_id  = award.get_field('fg-feature-image')  %}
           {% if img_id is iterable %}{% set img_id = img_id | first %}{% endif %}
           {% set img_id = img_id +0 %}
           {% if img_id > 0 %}{% set image = TimberImage(img_id) %}{% else %}{% set image = false %}{% endif %}
-
-          <div class="award-item-wrapper" >
-            {% if award.link and false %}<a href="{{award.link}}" style="text-decoration: none" >{% endif %}
-              {% if image %}
-                <div class="award-item-content">
-                  {% if image %}<img src="{{image.src}}"  alt="{{award.title}}" />{% endif %}
-                </div>
-              {% endif %}
-              {% if award.link and false %}</a>{% endif %}
-          </div>
-          <div style="text-align: center">
-            <div class="award-title">{{award.title}}</div>
-            <div class="award-publisher">{{award.get_field('fg-publisher')}}</div>
+          <div class="award-item-container">
+            <div class="" >
+              {% if award.link and false %}<a href="{{award.link}}" style="text-decoration: none" >{% endif %}
+                {% if image %}
+                  <div class="award-item-content">
+                    {% if image %}<img src="{{image.src}}"  alt="{{award.title}}" />{% endif %}
+                  </div>
+                {% endif %}
+                {% if award.link and false %}</a>{% endif %}
+            </div>
+            <div style="text-align: center">
+              <div class="award-title">{{award.title}}</div>
+              <div class="award-publisher">{{award.get_field('fg-publisher')}}</div>
+            </div>
           </div>
           [/slick_slide]
       {% endfor %}

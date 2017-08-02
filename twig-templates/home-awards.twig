@@ -3,7 +3,7 @@
   <div class="container">
     <div class="inner-container">
       {% filter shortcodes %}
-      [slick_carousel id="home-awards-carousel" slidesPerRow="3" appendsArrows="#home-awards-carousel" arrows="true"]
+      [slick_carousel id="home-awards-carousel" slidestoshow="3" responsive="&#91;{breakpoint: 1199, settings: { slidesToShow : 3}},{breakpoint: 989, settings : {slidesToShow : 2}},{breakpoint: 480, settings: {slidesToShow: 1}}&#93;" appendsarrows="#home-awards-carousel" arrows="true"]
       {% for award in awards | reverse %}
           [slick_slide]
           {% set img_id  = award.get_field('fg-feature-image')  %}

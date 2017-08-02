@@ -1,0 +1,41 @@
+{% set specials = function('get_fg_post_type', 'special', null, 'menu_order') | reverse %}
+<div class="section section-specials {% if data.background %}script-parallax{% endif %}" {% if data.background %}data-offset="0" data-ratio="9" data-background="{{data.background}}"{% endif %} >
+  <div class="container">
+    <div class="inner-container">
+      <h2 class="h1">Special Offers</h2>
+      {% filter shortcodes %}
+      [slick_carousel id="home-special-carousel" slidestoshow="2"  appendsarrows="#home-special-carousel" arrows="true" responsive="&#91;{breakpoint: 1199, settings: { slidesToShow : 2}},{breakpoint: 998, settings : {slidesToShow : 1}}&#93;"]
+      {% for special in specials  %}
+        {% if special.get_field('fg-widget-enable')  == 'yes'  %}
+          {# background image on index #}
+          {% set feature_image = false %}
+          {% set img_id = special.get_field('fg-widget-images') %}
+          {% if img_id is iterable %}{% set img_id = img_id | first %}{% endif %}
+          {% if  img_id + 0 > 0 %}
+            {% set feature_image = TimberImage(img_id) %}
+          {% endif %}
+          [slick_slide]
+          <div class="special-container" >
+            <div  >
+              <a href="{{special.link}}" target="_self"  style="" class="special-item-wrapper" >
+                <div class="special-item-image" data-background="{{feature_image.src}}" >
+                  <img src="{{feature_image.src}}" alt="{{feature_image.title}}" class="img-responsive"  />
+                </div>
+                <div class="special-item-image-overlay">
+                    <p>{{special.get_field('fg-hover-text')}}</p>
+                    <div class="action-wrapper">
+                      <button class="btn btn-secondary" href="" >{{special.get_field('fg-hover-button-text') | default('Learn More')}}</button>
+                    </div>
+               </div>
+               <div class="special-title">       <div class="special-title-inner">{{special.title}}</div></div>
+              </a>
+            </div>
+          </div>
+          [/slick_slide]
+        {% endif %}
+      {% endfor %}
+      [/slick_carousel]
+      {% endfilter %}
+    </div>
+  </div>
+</div>

@@ -22,11 +22,11 @@ function get_slideshow_fields($group='') {
             'field' => 'slide-or-image-radio',
             'label' => '',
             'choices' => [
-                'image'     => 'Feature Image',
+                'image'     => 'Hero Image',
                 'slideshow' => 'Slideshow'
             ],
             'value' => 'image',
-            'columns' => 2
+            'columns' => 4
         ],
         [
             'type' => 'select',

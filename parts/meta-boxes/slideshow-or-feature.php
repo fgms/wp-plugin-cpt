@@ -11,7 +11,7 @@ require_once __DIR__.'/../../includes/slideshow.php';
 piklist('field',[
     'type' => 'group',
     'field' => 'slideshow',
-    'label' => __('Slideshow / Feature Image'),
+    'label' => __('Slideshow / Hero Image'),
     'description' => _(''),
     'add_more' => false,
     'fields' => get_slideshow_fields('slideshow')

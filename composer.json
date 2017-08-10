@@ -1,6 +1,6 @@
 {
     "name" : "sturple/wp-plugin-cpt",
-    "version" : "0.1.5",
+    "version" : "0.1.6",
     "description" : "Wordpress plugin to add custom post types ie awards, testimonials, specials and slideshow custom post types ",
     "keywords" : ["wordpress", "plugin","FGMS"],
     "homepage" : "https://github.com/sturple/wp-plugin-cpt",
@@ -24,11 +24,11 @@
       "type" : "package",
       "package" : {
         "name" : "kenwheeler/slick",
-        "version" : "1.7.0",
+        "version" : "1.7.1",
         "source" : {
           "url" : "https://github.com/kenwheeler/slick",
           "type" : "git",
-          "reference" : "bee9b59"
+          "reference" : "77101f1"
         }
       }
     }

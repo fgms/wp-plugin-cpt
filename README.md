@@ -88,3 +88,33 @@ The **[fgallery]** shortcode accepts the following attribute.
 | filter    | This adds filters default is true |
 
 [page_gallery id="344" feature="true" filter="false" ]
+
+
+### [slick_carousel] and [slick_slide]
+
+This carousel uses jquery plugin from Ken Wheeler at https://github.com/kenwheeler/slick
+
+| Attribute | Default | Description |
+| --------- | ------- | ----------- |
+| id        | slick-carousel-default | selector id of  |
+| accessibilty | true | |
+| autoplay | false |  |
+| infinite | false | |
+| responsive |[{breakpoint: 1199, settings: { slidesToShow : 3}},{breakpoint: 989, settings : {slidesToShow : 2}},{breakpoint: 480, settings: {slidesToShow: 1}}] | |
+| slidesperrow | 3| |
+| slidestoshow | 3| |
+| slidestoscroll | 1 | |
+| speed | 300 | |
+| dots | true | |
+| arrows | true | |
+| prevarrow | <a class="animiated-control-arrow control-arrow-prev "><span ></span></a> | |
+| nextarrow | <a class="animiated-control-arrow control-arrow-next "><span ></span></a> | |
+
+```
+[slick_carousel id="my_slick_id" dots="false"]
+  [slick_slide]<img src />[/slick_slide]
+  [slick_slide]<img src />[/slick_slide]
+  [slick_slide]<img src />[/slick_slide]
+[/slick_carousel]
+
+```

@@ -11,14 +11,14 @@ call_user_func(function () {
       load_assets($data);
       //echo '<pre>'; print_R($atts);echo '</pre>';
       //echo '<pre>'; print_R($data);echo '</pre>';
-      echo sprintf(
+      return sprintf(
         '<div id="%1$s">%2$s</div>',
         $data['id'],
         do_shortcode($content)
       );
     }
     else {
-      echo 'Cannot find slick directory at '. $slick_path.'slick.min.js';
+      return 'Cannot find slick directory at '. $slick_path.'slick.min.js';
     }
   });
   function load_assets($data = []){

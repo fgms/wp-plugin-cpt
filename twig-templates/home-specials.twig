@@ -4,7 +4,7 @@
     <div class="inner-container">
       <h2 class="h1">Special Offers</h2>
       {% filter shortcodes %}
-      [slick_carousel id="home-special-carousel" slidestoshow="2"  appendsarrows="#home-special-carousel" arrows="true" responsive="&#91;{breakpoint: 1199, settings: { slidesToShow : 2}},{breakpoint: 998, settings : {slidesToShow : 1}}&#93;"]
+      [slick_carousel id="home-special-carousel" slidestoshow="2" autoplay="true"  autoplayspeed="10000"  appendsarrows="#home-special-carousel" arrows="true" responsive="&#91;{breakpoint: 1199, settings: { slidesToShow : 2}},{breakpoint: 998, settings : {slidesToShow : 1}}&#93;"]
       {% for special in specials  %}
         {% if special.get_field('fg-widget-enable')  == 'yes'  %}
           {# background image on index #}

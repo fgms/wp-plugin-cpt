@@ -39,7 +39,7 @@
         "composer/installers": "~1.0",
         "sturple/wordpress-utilities": "~1.0",
         "wpackagist-plugin/piklist" : ">0.9",
-        "kenwheeler/slick" : "~1.7"
+        "kenwheeler/slick" : "1.7.1"
     },
     "autoload": {
         "psr-4" : {"Fgms\\" : "src/Fgms/"}

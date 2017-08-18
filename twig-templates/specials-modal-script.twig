@@ -21,8 +21,19 @@ jQuery(function($){
           <a href="{{special.link}}"  class="btn btn-primary">Learn More</a>
           {% if special.get_field('fg-booking-url') %}
           <a href="{{special.get_field('fg-booking-url')}}" target="_blank" class="btn btn-primary">Check Availability</a>
+
           {% endif %}
           </div>
+          {% if function('is_plugin_active','wp-members/wp-members.php' ) %}
+          <div style="font-size: 0.7em;margin-top:12px;line-height:1.5em; font-style: italic; " class="special-modal-vip-member">
+          {% filter shortcodes %}
+          [specials_active singular="is %d additional exclusive offer" plural="are currently %d  additional exclusive specials" zero="<a href='/vip/' >Join our VIP Club</a> for additional exclusive offers."]
+          There %s available to <span style="font-weight: bold;">VIP Club</span> Members. <br/><a href="/vip/">Login</a> or <a href="{{function('get_permalink',3396)}}" >Join today</a>. It's free!
+          [/specials_active]
+          {% endfilter %}
+
+          </div>
+          {% endif %}
        {% endset %}
         fgms_specials.push({
           title : '{{special.title |e('js')}}',

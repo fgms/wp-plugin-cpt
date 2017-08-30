@@ -1,11 +1,11 @@
 <?php
 /**
- * Plugin Name: Custom Posttypes
- * Plugin URI: https://github.com/sturple/wp-plugin-cpt/
+ * Plugin Name: Fgms Custom Post Types
+ * Plugin URI: https://github.com/fgms/wp-plugin-cpt/
  * Description: Wordpress plugin to add custom post types for hotels ie Awards, Testimonials, Specials, Galleries and Slideshows
- * Version: 0.1.6
+ * Version: 0.1.7
  * Author: Shawn Turple
- * Author URI: http://turple.ca
+ * Author URI: https://github.com/fgms/
  * License: GPL-3.0
  * Plugin Type: Piklist
  */
